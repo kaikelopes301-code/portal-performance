@@ -1,0 +1,928 @@
+{
+  "Shopping Jardim Sul": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Metrópole": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Passeio das Águas": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Goiânia": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Praça Nova Araçatuba": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Campo Limpo": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Boulevard BH": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Plaza Niterói": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Carioca Shopping": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10",
+    "intro": "Encaminhamos a medição mensal referente à Carioca Shopping. Lembramos que, antes da emissão da NF, a medição deve ser validada pela Atlas. Ressaltamos ainda que o SLA também é considerado no relatório mensal apresentado à diretoria. Solicitamos, portanto, a validação da medição e, havendo divergências, o envio das ocorrências de faltas e atrasos.",
+    "observation": "Observação: caso a Nota Fiscal já tenha sido emitida sem considerar os descontos ora apontados, os valores poderão ser objeto de desconto retroativo na competência subsequente."
+  },
+  "Caxias Shopping": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10",
+    "intro": "Encaminhamos a medição mensal referente à Caxias Shopping. Lembramos que, antes da emissão da NF, a medição deve ser validada pela Atlas. Ressaltamos ainda que o SLA também é considerado no relatório mensal apresentado à diretoria. Solicitamos, portanto, a validação da medição e, havendo divergências, o envio das ocorrências de faltas e atrasos.",
+    "observation": "Observação: caso a Nota Fiscal já tenha sido emitida sem considerar os descontos ora apontados, os valores poderão ser objeto de desconto retroativo na competência subsequente."
+  },
+  "Shopping Grande Rio": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Boulevard Feira de Santana": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Informação pendente": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Manauara Shopping": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Plaza Sul": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Vitória da Conquista": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Parangaba": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Rio Anil": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Taboão": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping da Bahia": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Total": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Catuaí Shopping Londrina": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10",
+    "intro": "Encaminhamos a medição mensal referente à Catuaí Shopping Londrina. Lembramos que, antes da emissão da NF, a medição deve ser validada pela Atlas. Ressaltamos ainda que o SLA também é considerado no relatório mensal apresentado à diretoria. Solicitamos, portanto, a validação da medição e, havendo divergências, o envio das ocorrências de faltas e atrasos.",
+    "observation": "Observação: caso a Nota Fiscal já tenha sido emitida sem considerar os descontos ora apontados, os valores poderão ser objeto de desconto retroativo na competência subsequente."
+  },
+  "Catuaí Shopping Maringá": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Campo Grande": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Curitiba": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Tamboré": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "São Bernardo Plaza Shopping": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Boulevard Bauru": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Franca Shopping": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Praça Nova Santa Maria": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Parque Dom Pedro": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Piracicaba": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Villa Lobos": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Villagio Caxias": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Center Shopping Uberlândia": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Mooca Plaza Shopping": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Del Rey": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Estação BH": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Estação Cuiabá": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Metrô Santa Cruz": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Tijuca": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Unidade": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Bangu Shopping": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10",
+    "intro": "Encaminhamos a medição mensal referente à Bangu Shopping. Lembramos que, antes da emissão da NF, a medição deve ser validada pela Atlas. Ressaltamos ainda que o SLA também é considerado no relatório mensal apresentado à diretoria. Solicitamos, portanto, a validação da medição e, havendo divergências, o envio das ocorrências de faltas e atrasos.",
+    "observation": "Observação: caso a Nota Fiscal já tenha sido emitida sem considerar os descontos ora apontados, os valores poderão ser objeto de desconto retroativo na competência subsequente."
+  },
+  "Independência Shopping": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Norte Shopping": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Passeio Shopping": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Recreio Shopping": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Rio Design Leblon": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Leblon": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Shopping Vila Velha": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Amazonas Shopping": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Boulevard Belém": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Cariri Shopping": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  },
+  "Parque Shopping Belém": {
+    "columns": [
+      "Unidade",
+      "Categoria",
+      "Fornecedor",
+      "HC Planilha",
+      "Dias Faltas",
+      "Horas Atrasos",
+      "Valor Planilha",
+      "Desc. Falta Validado Atlas",
+      "Desc. Atraso Validado Atlas",
+      "Desconto SLA Mês",
+      "Valor Mensal Final",
+      "Mês de emissão da NF"
+    ],
+    "month_reference": "2025-10"
+  }
+}

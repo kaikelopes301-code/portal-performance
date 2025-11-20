@@ -1,0 +1,904 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <!-- TEMPLATE_VERSION: 2025-10-24-premium-professional-report-enhanced -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <meta name="supported-color-schemes" content="light" />
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+    <!--[if !mso]><!-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!--<![endif]-->
+    <style>
+      /* ==================== RESET & BASE ==================== */
+      * { 
+        box-sizing: border-box; 
+        margin: 0;
+        padding: 0;
+      }
+      
+      body { 
+        margin: 0 !important; 
+        padding: 0 !important; 
+        width: 100% !important;
+        min-width: 100% !important;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        font-git branch -M mainmily: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif !important;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+      }
+      
+      table { 
+        border-collapse: collapse !important; 
+        mso-table-lspace: 0pt !important;
+        mso-table-rspace: 0pt !important;
+      }
+      
+      img { 
+        border: 0 !important; 
+        outline: none !important; 
+        text-decoration: none !important; 
+        display: block !important;
+        -ms-interpolation-mode: bicubic;
+      }
+      
+      a { 
+        color: inherit; 
+        text-decoration: none !important; 
+      }
+      
+      p {
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Outlook específico */
+      .ExternalClass { width: 100%; }
+      .ExternalClass,
+      .ExternalClass p,
+      .ExternalClass span,
+      .ExternalClass font,
+      .ExternalClass td,
+      .ExternalClass div {
+        line-height: 100%;
+      }
+
+      /* ==================== CONTAINER PREMIUM ==================== */
+      .report-wrapper {
+        width: 100% !important;
+        padding: 48px 24px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+      
+      .panel {
+        width: 100%;
+        max-width: 1200px;
+        background: #ffffff;
+        border-radius: 24px;
+        box-shadow: 
+          0 20px 60px rgba(0, 0, 0, 0.3),
+          0 8px 20px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+      }
+
+      /* ==================== HEADER PREMIUM ==================== */
+      .header-section {
+        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        padding: 48px 48px 40px 48px;
+        position: relative;
+      }
+
+      .header-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .logo-container {
+        margin-bottom: 32px;
+        padding: 0;
+        display: block;
+      }
+
+      .report-title {
+        font-size: 36px;
+        font-weight: 700;
+        color: #000000;
+        margin: 0 0 16px 0;
+        line-height: 1.3;
+        letter-spacing: -0.02em;
+      }
+
+      .report-subtitle {
+        font-size: 16px;
+        color: #000000;
+        margin: 0;
+        line-height: 1.6;
+      }
+
+      .badge-premium {
+        display: inline-block;
+        padding: 10px 24px;
+        background: rgba(255, 255, 255, 0.98);
+        color: #1e3a8a;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 14px;
+        margin: 16px 8px 0 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        vertical-align: middle;
+      }
+
+      .link-premium {
+        color: #000000;
+        text-decoration: none;
+        border-bottom: 2px solid #000000;
+        padding-bottom: 2px;
+        font-weight: 600;
+      }
+
+      /* ==================== CONTENT SECTION ==================== */
+      .content-section {
+        padding: 48px;
+        background: #ffffff;
+      }
+
+      .intro-text {
+        font-size: 15px;
+        color: #374151;
+        line-height: 1.8;
+        margin: 0 0 20px 0;
+      }
+
+      .intro-text strong {
+        color: #1e3a8a;
+        font-weight: 700;
+      }
+
+      /* ==================== ALERT BOX PREMIUM ==================== */
+      .alert-premium {
+        background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        border: 2px solid #3b82f6;
+        border-radius: 16px;
+        padding: 24px;
+        margin: 0 0 40px 0;
+      }
+
+      .alert-content {
+        font-size: 14px;
+        color: #1e3a8a;
+        line-height: 1.7;
+      }
+
+      .alert-content strong {
+        display: block;
+        font-size: 15px;
+        margin-bottom: 8px;
+        color: #1e40af;
+      }
+
+      /* ==================== SECTION HEADER ==================== */
+      .section-header {
+        margin: 48px 0 24px 0;
+        padding-bottom: 12px;
+        border-bottom: 3px solid #e5e7eb;
+      }
+
+      .section-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: #0f172a;
+        margin: 0;
+        letter-spacing: -0.01em;
+      }
+
+      /* ==================== KPI CARDS PREMIUM ==================== */
+      .kpi-grid {
+        width: 100%;
+        margin: 0 0 48px 0;
+      }
+
+      .kpi-card {
+        background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+        border: 2px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 28px 24px;
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        border-left: 5px solid #3b82f6;
+      }
+
+      .kpi-label {
+        font-size: 12px;
+        font-weight: 700;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin: 0 0 12px 0;
+        line-height: 1.3;
+      }
+
+      .kpi-value {
+        font-size: 32px;
+        font-weight: 800;
+        color: #0f172a;
+        margin: 0 0 12px 0;
+        line-height: 1.1;
+      }
+
+      .kpi-trend {
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 12px;
+        padding: 6px 12px;
+        border-radius: 8px;
+        display: inline-block;
+      }
+
+      .kpi-trend.positive {
+        color: #059669;
+        background: #d1fae5;
+      }
+
+      .kpi-trend.negative {
+        color: #dc2626;
+        background: #fee2e2;
+      }
+
+      .kpi-trend.neutral {
+        color: #64748b;
+        background: #f1f5f9;
+      }
+
+      .kpi-sublabel {
+        font-size: 13px;
+        color: #475569;
+        margin-top: 12px;
+        font-weight: 600;
+        line-height: 1.4;
+      }
+
+      /* ==================== TABLE SECTION ==================== */
+      .table-container {
+        background: #ffffff;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 2px solid #e2e8f0;
+        margin: 0 0 40px 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+
+      .table-header-bar {
+        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        padding: 24px 32px;
+        color: #000000;
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .data-table {
+        width: 100%;
+        font-size: 14px;
+        background: #ffffff;
+      }
+
+      .data-table thead th {
+        background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+        color: #1e3a8a;
+        font-weight: 700;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding: 20px 16px;
+        text-align: left;
+        border-bottom: 3px solid #cbd5e1;
+        white-space: nowrap;
+      }
+
+      .data-table tbody td {
+        padding: 20px 16px;
+        border-bottom: 1px solid #f1f5f9;
+        color: #334155;
+        vertical-align: middle;
+        line-height: 1.5;
+      }
+
+      .data-table tbody tr:nth-child(even) {
+        background-color: #f9fafb;
+      }
+
+      .data-table tbody td:first-child {
+        font-weight: 700;
+        color: #0f172a;
+      }
+
+      .td-center, .th-center {
+        text-align: center !important;
+      }
+
+      /* ==================== CHIPS & BADGES ==================== */
+      .chip {
+        display: inline-block;
+        padding: 8px 16px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .chip-zero {
+        background: #f1f5f9;
+        color: #475569;
+        border: 2px solid #cbd5e1;
+      }
+
+      .chip-pending {
+        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        color: #92400e;
+        border: 2px solid #fbbf24;
+      }
+
+      .chip-negative {
+        background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+        color: #991b1b;
+        border: 2px solid #f87171;
+      }
+
+      .chip-positive {
+        background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+        color: #065f46;
+        border: 2px solid #34d399;
+      }
+
+      .value-final {
+        font-weight: 800;
+        color: #000000;
+        font-size: 16px;
+      }
+
+      /* ==================== SUMMARY BAR ==================== */
+      .summary-bar {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        padding: 40px 48px;
+        border-radius: 16px;
+        margin: 0 0 40px 0;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      }
+
+      .summary-inner {
+        text-align: center;
+      }
+
+      .summary-label {
+        font-size: 16px;
+        color: #000000;
+        font-weight: 600;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .summary-value {
+        font-size: 42px;
+        font-weight: 900;
+        color: #000000;
+        margin-bottom: 24px;
+        letter-spacing: -0.02em;
+      }
+
+      /* ==================== CTA BUTTON PREMIUM ==================== */
+      .cta-container {
+        text-align: center;
+        margin-top: 24px;
+      }
+
+      .cta-premium {
+        display: inline-block;
+        padding: 18px 48px;
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        color: #000000 !important;
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border-radius: 999px;
+        box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+        text-decoration: none !important;
+      }
+
+      /* ==================== FOOTER ==================== */
+      .footer-section {
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        padding: 40px 48px;
+        border-top: 2px solid #e2e8f0;
+      }
+
+      .footer-text {
+        font-size: 14px;
+        color: #64748b;
+        line-height: 1.8;
+        margin: 0 0 12px 0;
+      }
+
+      .footer-meta {
+        font-size: 12px;
+        color: #94a3b8;
+        line-height: 1.7;
+        margin: 20px 0 0 0;
+        padding-top: 20px;
+        border-top: 1px solid #e2e8f0;
+      }
+
+      /* ==================== DIVIDER ==================== */
+      .divider {
+        height: 2px;
+        background: linear-gradient(90deg, transparent 0%, #e5e7eb 50%, transparent 100%);
+        margin: 32px 0;
+      }
+
+      /* ==================== RESPONSIVE ==================== */
+      @media screen and (max-width: 768px) {
+        .report-wrapper {
+          padding: 24px 16px !important;
+        }
+        
+        .header-section {
+          padding: 32px 24px !important;
+        }
+
+        .content-section {
+          padding: 32px 24px !important;
+        }
+
+        .footer-section {
+          padding: 32px 24px !important;
+        }
+
+        .report-title {
+          font-size: 28px !important;
+        }
+
+        .kpi-grid td {
+          display: block !important;
+          width: 100% !important;
+          padding: 0 0 16px 0 !important;
+        }
+
+        .summary-bar {
+          padding: 32px 24px !important;
+        }
+
+        .summary-value {
+          font-size: 32px !important;
+        }
+
+        .table-header-bar {
+          padding: 20px 16px !important;
+          font-size: 16px !important;
+        }
+
+        .data-table thead th,
+        .data-table tbody td {
+          padding: 12px 8px !important;
+          font-size: 12px !important;
+        }
+      }
+
+      @media screen and (max-width: 600px) {
+        .panel {
+          border-radius: 12px !important;
+        }
+
+        .kpi-card {
+          border-radius: 12px !important;
+        }
+
+        .table-container {
+          border-radius: 12px !important;
+        }
+
+        .alert-premium {
+          border-radius: 12px !important;
+          padding: 20px !important;
+        }
+      }
+
+      /* ==================== DARK MODE SUPPORT ==================== */
+      @media (prefers-color-scheme: dark) {
+        .panel {
+          background: #ffffff !important;
+        }
+        
+        .content-section {
+          background: #ffffff !important;
+        }
+      }
+
+      /* ==================== UTILITY CLASSES ==================== */
+      .text-center { text-align: center !important; }
+      .mb-0 { margin-bottom: 0 !important; }
+      .mt-16 { margin-top: 16px !important; }
+      .mt-24 { margin-top: 24px !important; }
+      .mt-32 { margin-top: 32px !important; }
+    </style>
+  </head>
+  <body style="margin: 0; padding: 0; width: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <!-- Wrapper principal -->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 48px 24px;">
+      <tr>
+        <td align="center" style="padding: 0;">
+          <!-- Painel principal -->
+          <table role="presentation" style="width: 100%; max-width: 1200px; background: #ffffff; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);" cellpadding="0" cellspacing="0" border="0">
+
+            <!-- ==================== HEADER PREMIUM ==================== -->
+            <tr>
+              <td class="header-section" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); padding: 48px 48px 40px 48px;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                    <td class="header-content">
+                      <!-- Logo -->
+                      <div class="logo-container" style="margin-bottom: 32px;">
+                        <!--[if mso]><img src="cid:{{ logo_cid | default('atlas-logo') }}" width="{{ LOGO_WIDTH }}" alt="Atlas Inovações" style="max-width:200px;height:auto;" /><![endif]-->
+                        <!--[if !mso]><!-->{% if logo_img_src %}<img src="{{ logo_img_src }}" width="{{ LOGO_WIDTH }}" alt="Atlas Inovações" style="max-width:400px;height:auto;display:block;" />{% endif %}<!--<![endif]-->
+                      </div>
+                      
+                      <!-- Título -->
+                      <h1 class="report-title" style="font-size: 36px; font-weight: 700; color: #000000; margin: 0 0 16px 0; line-height: 1.3; letter-spacing: -0.02em;">
+                        {{ copy.title_prefix | default('Relatório de Medição Mensal') }} — {{ unidade }}
+                      </h1>
+                      
+                      <!-- Subtítulo -->
+                      <div class="report-subtitle" style="font-size: 16px; color: #000000; margin: 0; line-height: 1.6;">
+                        {{ copy.month_ref_label | default('Período de referência:') }}
+                        <span class="badge-premium" style="display: inline-block; padding: 10px 24px; background: rgba(255, 255, 255, 0.98); color: #1e3a8a; border-radius: 999px; font-weight: 700; font-size: 14px; margin: 16px 8px 0 0;">{{ mes_extenso }}</span>
+                        {% if SLA_URL %}
+                        <span style="margin: 0 8px;">•</span>
+                        <a href="{{ SLA_URL }}" class="link-premium" style="color: #000000; text-decoration: none; border-bottom: 2px solid #000000; padding-bottom: 2px; font-weight: 600;">{{ copy.sla_link_label | default('Acessar SLA / Validação') }}</a>
+                        {% endif %}
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- ==================== CONTENT SECTION ==================== -->
+            <tr>
+              <td class="content-section" style="padding: 48px; background: #ffffff;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                    <td>
+                      <!-- Introdução -->
+                      <p class="intro-text" style="font-size: 15px; color: #374151; line-height: 1.8; margin: 0 0 20px 0;">{{ copy.greeting | safe }}</p>
+                      <p class="intro-text" style="font-size: 15px; color: #374151; line-height: 1.8; margin: 0 0 20px 0;">{{ copy.intro | safe }}</p>
+
+                      <!-- Alert Premium -->
+                      <div class="alert-premium" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #3b82f6; border-radius: 16px; padding: 24px; margin: 0 0 40px 0;">
+                        <div class="alert-content" style="font-size: 14px; color: #1e3a8a; line-height: 1.7;">
+                          <strong style="display: block; font-size: 15px; margin-bottom: 8px; color: #1e40af;">ℹ️ Informação Importante:</strong>
+                          {{ copy.observation | safe }}
+                        </div>
+                      </div>
+
+                      {# ================= Cálculos (mantidos do original) ================= #}
+                      {% set desconto_cols = [
+                        'Desc. Falta Validado Atlas','Desc. Atraso Validado Atlas','Desconto SLA Mês',
+                        'Desconto SLA Retroativo','Desconto Equipamentos','Outros descontos','Prêmio Assiduidade'
+                      ] %}
+
+                      {% macro trend(curr, prev, good_when='down') -%}
+                        {%- if (curr is not none) and (prev is not none) -%}
+                          {%- set a = curr|float -%}
+                          {%- set b = prev|float -%}
+                          {%- set denom = (a|abs + b|abs) -%}
+                          {%- if denom > 0 -%}
+                            {%- set pct = 200.0 * (a - b) / denom -%}
+                            {%- set good = (pct < 0) if good_when=='down' else (pct > 0) -%}
+                            {%- if good -%}
+                              <span class="kpi-trend positive" style="font-size: 13px; font-weight: 600; margin-top: 12px; padding: 6px 12px; border-radius: 8px; display: inline-block; color: #059669; background: #d1fae5;">▲ {{ '%+.2f'|format(pct) }}% vs mês anterior</span>
+                            {%- else -%}
+                              <span class="kpi-trend negative" style="font-size: 13px; font-weight: 600; margin-top: 12px; padding: 6px 12px; border-radius: 8px; display: inline-block; color: #dc2626; background: #fee2e2;">▼ {{ '%+.2f'|format(pct) }}% vs mês anterior</span>
+                            {%- endif -%}
+                          {%- else -%}
+                            <span class="kpi-trend neutral" style="font-size: 13px; font-weight: 600; margin-top: 12px; padding: 6px 12px; border-radius: 8px; display: inline-block; color: #64748b; background: #f1f5f9;">—</span>
+                          {%- endif -%}
+                        {%- else -%}
+                          <span class="kpi-trend neutral" style="font-size: 13px; font-weight: 600; margin-top: 12px; padding: 6px 12px; border-radius: 8px; display: inline-block; color: #64748b; background: #f1f5f9;">—</span>
+                        {%- endif -%}
+                      {%- endmacro %}
+
+                      {% macro trend_abs(curr_abs, prev_abs, prefer='up') -%}
+                        {%- if (curr_abs is not none) and (prev_abs is not none) -%}
+                          {%- set a = curr_abs|float -%}
+                          {%- set b = prev_abs|float -%}
+                          {%- set denom = (a|abs + b|abs) -%}
+                          {%- if denom > 0 -%}
+                            {%- set pct = 200.0 * (a - b) / denom -%}
+                            {%- set good = (pct > 0) if prefer=='up' else (pct < 0) -%}
+                            {%- if good -%}
+                              <span class="kpi-trend positive" style="font-size: 13px; font-weight: 600; margin-top: 12px; padding: 6px 12px; border-radius: 8px; display: inline-block; color: #059669; background: #d1fae5;">▲ {{ '%+.2f'|format(pct) }}% vs mês anterior</span>
+                            {%- else -%}
+                              <span class="kpi-trend negative" style="font-size: 13px; font-weight: 600; margin-top: 12px; padding: 6px 12px; border-radius: 8px; display: inline-block; color: #dc2626; background: #fee2e2;">▼ {{ '%+.2f'|format(pct) }}% vs mês anterior</span>
+                            {%- endif -%}
+                          {%- else -%}
+                            <span class="kpi-trend neutral" style="font-size: 13px; font-weight: 600; margin-top: 12px; padding: 6px 12px; border-radius: 8px; display: inline-block; color: #64748b; background: #f1f5f9;">—</span>
+                          {%- endif -%}
+                        {%- else -%}
+                          <span class="kpi-trend neutral" style="font-size: 13px; font-weight: 600; margin-top: 12px; padding: 6px 12px; border-radius: 8px; display: inline-block; color: #64748b; background: #f1f5f9;">—</span>
+                        {%- endif -%}
+                      {%- endmacro %}
+
+                      {% set ns = namespace(vplan=0.0, vmf=0.0, desc=0.0) %}
+                      {% for r in rows %}
+                        {% set _vp = ((r['Valor Planilha'] if 'Valor Planilha' in r else 0)
+                          |string|replace('R$','')|replace('&nbsp;',' ')|replace('\u00A0',' ')
+                          |replace('.','')|replace(',','.')|trim|float) %}
+                        {% set ns.vplan = ns.vplan + _vp %}
+
+                        {% set _vmf = ((r['Valor Mensal Final'] if 'Valor Mensal Final' in r else 0)
+                          |string|replace('R$','')|replace('&nbsp;',' ')|replace('\u00A0',' ')
+                          |replace('.','')|replace(',','.')|trim|float) %}
+                        {% set ns.vmf = ns.vmf + _vmf %}
+
+                        {% for c in desconto_cols %}
+                          {% if c in r %}
+                            {% set _d = (r[c]|string|replace('R$','')|replace('&nbsp;',' ')|replace('\u00A0',' ')
+                              |replace('.','')|replace(',','.')|trim) %}
+                            {% if _d != '' %}
+                              {% set ns.desc = ns.desc + (_d|float) %}
+                            {% endif %}
+                          {% endif %}
+                        {% endfor %}
+                      {% endfor %}
+                      {% set vplanilha_total = ns.vplan %}
+                      {% set vmf_total = ns.vmf %}
+                      {% set desc_geral_total = ns.desc %}
+
+                      {% set vmf_prev = none %}
+                      {% set vplanilha_prev = none %}
+                      {% set desc_geral_prev = none %}
+                      {% if rows_prev is defined and rows_prev %}
+                        {% set ns_prev = namespace(vmf=0.0, vplan=0.0, desc=0.0) %}
+                        {% for r in rows_prev %}
+                          {% set _vp_p = ((r['Valor Planilha'] if 'Valor Planilha' in r else 0)
+                            |string|replace('R$','')|replace('&nbsp;',' ')|replace('\u00A0',' ')
+                            |replace('.','')|replace(',','.')|trim|float) %}
+                          {% set ns_prev.vplan = ns_prev.vplan + _vp_p %}
+                          {% set _vmf_p = ((r['Valor Mensal Final'] if 'Valor Mensal Final' in r else 0)
+                            |string|replace('R$','')|replace('&nbsp;',' ')|replace('\u00A0',' ')
+                            |replace('.','')|replace(',','.')|trim|float) %}
+                          {% set ns_prev.vmf = ns_prev.vmf + _vmf_p %}
+                          {% for c in desconto_cols %}
+                            {% if c in r %}
+                              {% set _dp = (r[c]|string|replace('R$','')|replace('&nbsp;',' ')|replace('\u00A0',' ')
+                                |replace('.','')|replace(',','.')|trim) %}
+                              {% if _dp != '' %}
+                                {% set ns_prev.desc = ns_prev.desc + (_dp|float) %}
+                              {% endif %}
+                            {% endif %}
+                          {% endfor %}
+                        {% endfor %}
+                        {% set vmf_prev = ns_prev.vmf %}
+                        {% set vplanilha_prev = ns_prev.vplan %}
+                        {% set desc_geral_prev = ns_prev.desc %}
+                      {% endif %}
+
+                      {% set vmf_total_num = (summary.sum_valor_mensal_final) if (summary is defined and summary is not none and 'sum_valor_mensal_final' in summary) else vmf_total %}
+                      {% set vmf_prev_num = (prev_summary.sum_valor_mensal_final) if (prev_summary is defined and prev_summary is not none and 'sum_valor_mensal_final' in prev_summary) else vmf_prev %}
+
+                      {% set desc_geral_total_num = (summary.sum_descontos_gerais) if (summary is defined and summary is not none and 'sum_descontos_gerais' in summary) else desc_geral_total %}
+                      {% set desc_geral_prev_num = (prev_summary.sum_descontos_gerais) if (prev_summary is defined and prev_summary is not none and 'sum_descontos_gerais' in prev_summary) else desc_geral_prev %}
+
+                      {% set by_fornec = {} %}
+                      {% for r in rows %}
+                        {% set f = r['Fornecedor'] if 'Fornecedor' in r else '—' %}
+                        {% set val = ((r['Valor Mensal Final'] if 'Valor Mensal Final' in r else 0)
+                          |string|replace('R$','')|replace('&nbsp;',' ')|replace('\u00A0',' ')
+                          |replace('.','')|replace(',','.')|trim|float) %}
+                        {% set _ = by_fornec.update({f: (by_fornec.get(f,0)+val)}) %}
+                      {% endfor %}
+                      {% set top_fornec = '—' %}
+                      {% set top_val = 0.0 %}
+                      {% set sorted_fornec = by_fornec|dictsort(by='value', reverse=true) %}
+                      {% if sorted_fornec and (sorted_fornec|length) > 0 %}
+                        {% set top_fornec = sorted_fornec[0][0] %}
+                        {% set top_val = sorted_fornec[0][1] %}
+                      {% endif %}
+
+                      <!-- Section Header: Indicadores Principais -->
+                      <div class="section-header" style="margin: 48px 0 24px 0; padding-bottom: 12px; border-bottom: 3px solid #e5e7eb;">
+                        <h2 class="section-title" style="font-size: 24px; font-weight: 700; color: #0f172a; margin: 0; letter-spacing: -0.01em;">📊 Indicadores Principais</h2>
+                      </div>
+
+                      <!-- ==================== KPI CARDS PREMIUM ==================== -->
+                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" class="kpi-grid" style="margin: 0 0 48px 0;">
+                        <tr>
+                          <!-- KPI 1: Valor Mensal Final -->
+                          <td style="width: 33.33%; vertical-align: top; padding: 0 8px 0 0;">
+                            <div class="kpi-card" style="background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%); border: 2px solid #e2e8f0; border-radius: 16px; padding: 28px 24px; border-left: 5px solid #3b82f6;">
+                              <div class="kpi-label" style="font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 12px 0;">Valor Mensal Final</div>
+                              <div class="kpi-value" style="font-size: 32px; font-weight: 800; color: #0f172a; margin: 0 0 12px 0;">{{ fmt_brl(vmf_total_num) }}</div>
+                              {{ trend(vmf_total_num, vmf_prev_num, 'down') }}
+                            </div>
+                          </td>
+
+                          <!-- KPI 2: Descontos Gerais -->
+                          {% set desc_abs = desc_geral_total_num|abs %}
+                          {% set desc_prev_abs = (desc_geral_prev_num|abs) if (desc_geral_prev_num is not none) else none %}
+                          <td style="width: 33.33%; vertical-align: top; padding: 0 4px;">
+                            <div class="kpi-card" style="background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%); border: 2px solid #e2e8f0; border-radius: 16px; padding: 28px 24px; border-left: 5px solid #dc2626;">
+                              <div class="kpi-label" style="font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 12px 0;">Descontos Aplicados</div>
+                              <div class="kpi-value" style="font-size: 32px; font-weight: 800; color: #dc2626; margin: 0 0 12px 0;">{{ fmt_brl(desc_geral_total_num) }}</div>
+                              {{ trend_abs(desc_abs, desc_prev_abs, 'up') }}
+                            </div>
+                          </td>
+
+                          <!-- KPI 3: Fornecedor Líder -->
+                          <td style="width: 33.33%; vertical-align: top; padding: 0 0 0 8px;">
+                            <div class="kpi-card" style="background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%); border: 2px solid #e2e8f0; border-radius: 16px; padding: 28px 24px; border-left: 5px solid #8b5cf6;">
+                              <div class="kpi-label" style="font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 12px 0;">Fornecedor Líder</div>
+                              <div class="kpi-value" style="font-size: 32px; font-weight: 800; color: #0f172a; margin: 0 0 12px 0;">{{ fmt_brl(top_val) }}</div>
+                              <div class="kpi-sublabel" style="font-size: 13px; color: #475569; margin-top: 12px; font-weight: 600;">{{ top_fornec }}</div>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <!-- Divider -->
+                      <div class="divider" style="height: 2px; background: linear-gradient(90deg, transparent 0%, #e5e7eb 50%, transparent 100%); margin: 32px 0;"></div>
+
+                      <!-- Section Header: Detalhamento -->
+                      <div class="section-header" style="margin: 48px 0 24px 0; padding-bottom: 12px; border-bottom: 3px solid #e5e7eb;">
+                        <h2 class="section-title" style="font-size: 24px; font-weight: 700; color: #0f172a; margin: 0; letter-spacing: -0.01em;">📋 Detalhamento da Medição</h2>
+                      </div>
+
+                      <!-- ==================== TABLE SECTION ==================== -->
+                      <div class="table-container" style="background: #ffffff; border-radius: 16px; overflow: hidden; border: 2px solid #e2e8f0; margin: 0 0 40px 0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);">
+                        <div class="table-header-bar" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); padding: 24px 32px; color: #000000; font-size: 18px; font-weight: 700;">
+                          📊 Dados Completos por Fornecedor
+                        </div>
+                        
+                        <div style="overflow-x: auto;">
+                          <table role="presentation" class="data-table" cellpadding="0" cellspacing="0" border="0" style="width: 100%; font-size: 14px; background: #ffffff;">
+                            <thead>
+                              <tr>
+                                {% for col in table_columns %}
+                                  <th class="{{ 'th-center' if table_numeric_columns is defined and col in table_numeric_columns else '' }}" style="background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%); color: #1e3a8a; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; padding: 20px 16px; text-align: {{ 'center' if table_numeric_columns is defined and col in table_numeric_columns else 'left' }}; border-bottom: 3px solid #cbd5e1; white-space: nowrap;">{{ col }}</th>
+                                {% endfor %}
+                              </tr>
+                            </thead>
+
+                            <tbody>
+                              {% set fallback_money = [
+                                'Valor Planilha','Desc. Falta Validado Atlas','Desc. Atraso Validado Atlas','Desconto SLA Mês',
+                                'Desconto SLA Retroativo','Desconto Equipamentos','Prêmio Assiduidade','Outros descontos',
+                                'Valor mensal com prorrogação do prazo pagamento',
+                                'Retroativo de dissídio','Valor extras validado Atlas','Valor Mensal Final'
+                              ] %}
+                              {% set fallback_percentage = ['Taxa de prorrogação do prazo pagamento'] %}
+                              {% set percentage_cols = (table_percentage_columns if table_percentage_columns is defined else fallback_percentage) %}
+                              {% set money_cols = (table_money_columns if table_money_columns is defined else fallback_money) %}
+                              {% set numeric_columns = (table_numeric_columns if table_numeric_columns is defined else ['HC Planilha','Dias Faltas','Horas Atrasos'] + money_cols + percentage_cols) %}
+
+                              {% for row in rows %}
+                                <tr style="{{ 'background-color: #f9fafb;' if loop.index is even else '' }}">
+                                  {% for col in table_columns %}
+                                    {% set raw = row[col] if col in row else '' %}
+                                    {% set s = (raw|string) if raw is not none else '' %}
+                                    {% set normalized = s|replace('\u00A0',' ')|replace('&nbsp;',' ')|replace('\r',' ')|replace('\n',' ') %}
+                                    {% set trimmed = normalized|trim %}
+                                    {% set lower = trimmed|lower %}
+
+                                    {% set is_nan = lower == 'nan' %}
+                                    {% set is_empty = (raw is none) or (trimmed == '') or is_nan %}
+                                    {% set is_text_pendente = lower in ['informação pendente','informacao pendente','preenchimento pendente'] %}
+
+                                    {% set display = trimmed %}
+                                    {% set compact = trimmed |replace('R$','') |replace('.','') |replace(',','.') |replace(' ','') %}
+                                    {% set compact_no_digits = compact
+                                      |replace('0','')|replace('1','')|replace('2','')|replace('3','')|replace('4','')
+                                      |replace('5','')|replace('6','')|replace('7','')|replace('8','')|replace('9','') %}
+                                    {% set has_digits = (compact_no_digits|length) < (compact|length) %}
+                                    {% set is_zero_like = has_digits and (compact|replace('-','')|replace('−','')|replace('–','') in ['0','0.0','0.00','0,00']) %}
+                                    {% set is_negative = compact.startswith('-') or compact.startswith('−') or compact.startswith('–') or (compact.startswith('(') and compact.endswith(')')) %}
+
+                                    {% set is_effectively_empty = is_empty %}
+                                    {% if col in money_cols and (has_digits or is_zero_like) %}
+                                      {% set is_effectively_empty = false %}
+                                    {% endif %}
+
+                                    {% set td_class = 'td-center' if col in numeric_columns else '' %}
+
+                                    <td class="{{ td_class }}" style="padding: 20px 16px; border-bottom: 1px solid #f1f5f9; color: #334155; vertical-align: middle; text-align: {{ 'center' if col in numeric_columns else 'left' }}; {{ 'font-weight: 700; color: #0f172a;' if loop.index0 == 0 else '' }}">
+                                      {% if is_effectively_empty or is_text_pendente %}
+                                        {% if col == 'Desconto SLA Mês' %}
+                                          <span class="chip chip-pending" style="display: inline-block; padding: 8px 16px; border-radius: 999px; font-size: 12px; font-weight: 700; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); color: #92400e; border: 2px solid #fbbf24;">{{ copy.pending_fill_label | default('Preenchimento pendente') | safe }}</span>
+                                        {% elif col == 'Desconto SLA Retroativo' %}
+                                          {# vazio #}
+                                        {% else %}
+                                          <span class="chip chip-pending" style="display: inline-block; padding: 8px 16px; border-radius: 999px; font-size: 12px; font-weight: 700; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); color: #92400e; border: 2px solid #fbbf24;">{{ copy.pending_info_label | default('Informação pendente') | safe }}</span>
+                                        {% endif %}
+
+                                      {% elif col in money_cols and is_negative %}
+                                        <span class="chip chip-negative" style="display: inline-block; padding: 8px 16px; border-radius: 999px; font-size: 12px; font-weight: 700; background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); color: #991b1b; border: 2px solid #f87171;">{{ fmt_brl(display) }}</span>
+
+                                      {% elif col in money_cols and not is_negative and (display == 'R$ 0,00' or is_zero_like) %}
+                                        <span class="chip chip-zero" style="display: inline-block; padding: 8px 16px; border-radius: 999px; font-size: 12px; font-weight: 700; background: #f1f5f9; color: #475569; border: 2px solid #cbd5e1;">{{ fmt_brl(display) }}</span>
+
+                                      {% elif col == 'Valor Mensal Final' %}
+                                        <span class="value-final" style="font-weight: 800; color: #000000; font-size: 16px;">{{ fmt_brl(display) }}</span>
+
+                                      {% elif col in money_cols %}
+                                        {{ fmt_brl(display) }}
+
+                                      {% elif col in percentage_cols %}
+                                        {{ display if display.endswith('%') else (display + '%' if display and display != '0' else display) }}
+
+                                      {% else %}
+                                        {{ display if display is not none else '' }}
+                                      {% endif %}
+                                    </td>
+                                  {% endfor %}
+                                </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                      <!-- Divider -->
+                      <div class="divider" style="height: 2px; background: linear-gradient(90deg, transparent 0%, #e5e7eb 50%, transparent 100%); margin: 32px 0;"></div>
+
+                      <!-- ==================== SUMMARY BAR ==================== -->
+                      <div class="summary-bar" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 40px 48px; border-radius: 16px; margin: 0 0 40px 0; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);">
+                        <div class="summary-inner" style="text-align: center;">
+                          <div class="summary-label" style="font-size: 16px; color: #000000; font-weight: 600; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">{{ copy.sum_final_label | default('Valor Total da Medição:') }}</div>
+                          <div class="summary-value" style="font-size: 42px; font-weight: 900; color: #000000; margin-bottom: 24px; letter-spacing: -0.02em;">{{ soma_valor_mensal_final }}</div>
+                          
+                          {% if SLA_URL %}
+                          <div class="cta-container" style="text-align: center; margin-top: 24px;">
+                            <a href="{{ SLA_URL }}" class="cta-premium" style="display: inline-block; padding: 18px 48px; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); color: #000000 !important; font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; border-radius: 999px; text-decoration: none !important; box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);">
+                              {{ copy.cta_label | default('📝 Preencher SLA') | safe }}
+                            </a>
+                          </div>
+                          {% endif %}
+                        </div>
+                      </div>
+
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- ==================== FOOTER ==================== -->
+            <tr>
+              <td class="footer-section" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); padding: 40px 48px; border-top: 2px solid #e2e8f0;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                    <td>
+                      <div class="footer-text" style="font-size: 14px; color: #64748b; line-height: 1.8; margin: 0 0 12px 0;">
+                        {{ copy.footer_signature | safe }}
+                      </div>
+                      
+                      <div class="footer-meta" style="font-size: 12px; color: #94a3b8; line-height: 1.7; margin: 20px 0 0 0; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+                        <strong>{{ copy.recipients_label | default('Destinatários:') }}</strong> {{ destinatarios_exibicao }}<br>
+                        {{ copy.footer_autogen | default('Relatório gerado automaticamente pela automação Atlas Inovações.') }}<br>
+                        <em>Documento confidencial — Uso interno</em>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

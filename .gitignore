@@ -1,0 +1,4 @@
+projeto.zip
+# ou, se quiser ignorar todos os zips:
+ *.zip
+ .env

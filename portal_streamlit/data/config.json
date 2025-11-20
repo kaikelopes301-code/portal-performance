@@ -1,0 +1,8 @@
+{
+  "python_path": "python",
+  "main_py_path": "c:/backpperformance/main.py",
+  "xlsx_dir": "c:/backpperformance/planilhas",
+  "output_html_dir": "c:/backpperformance/output_html",
+  "default_regiao": "RJ",
+  "default_mes": "2025-10"
+}
