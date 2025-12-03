@@ -51,6 +51,10 @@ COLUMN_CANDIDATES = {
     "Contrato": ["Contrato","Número do Pedido","Pedido","OrderNumber"],
     "Funcionario": ["Funcionário","Colaborador"],
     "Status": ["Status","Status do Contrato","Situação"],
+    "Mes_Ref_Faturamento": [
+        "Mês referência para faturamento", "Mês Referência", "Mes Ref", "Referencia",
+        "Mes Referencia", "Competencia Referencia",
+    ],
 }
 
 DEFAULT_DISPLAY_COLUMNS = [
@@ -62,12 +66,27 @@ DEFAULT_DISPLAY_COLUMNS = [
 
 DISPLAY_HEADER_SYNONYMS = {
     "Desc. Falta Validado Atlas": ["Desconto Falta Validado Atlas","Desc_Falta"],
-    "Desc. Atraso Validado Atlas": ["Desconto Atraso Validado Atlas","Desc_Atraso"],
+    "Desc. Atraso Validado Atlas": ["Desconto Atraso Validado Atlas","Desconto Atrasos Validado Atlas","Desc_Atraso"],
     SLA_DESCONTO_CANONICAL: SLA_DESCONTO_SYNONYMS,
     "Desconto SLA Retroativo": [
         "Desc. SLA Retroativo","Desc SLA Retroativo","Retroativo SLA",
         "Desc. SLA Ret.","Desc SLA Ret","SLA Ret.","Retro. SLA",
+        "Retroativo SLA (desconto)","SLA Retroativo (desconto)","SLA desconto retroativo",
+        "SLA - Desconto Retroativo","Desconto SLA (Retroativo)","Retroativo (SLA)","RETROATIVO SLA",
+        "SLA retro","Desconto SLA Ret",
     ],
+    "Desconto Equipamentos": ["Desconto Equipamentos", "Desc Equipamentos", "Desc. Equipamentos"],
+    "Prêmio Assiduidade": ["Prêmio Assiduidade", "Premio Assiduidade", "Prêmio de Assiduidade"],
+    "Outros descontos": ["Outros descontos", "Outros Descontos", "Outros desc."],
+    "Taxa de prorrogação do prazo pagamento": [
+        "Taxa de prorrogação do prazo pagamento", "Taxa prorrogação prazo pagamento", "Taxa prorrogação",
+    ],
+    "Valor mensal com prorrogação do prazo pagamento": [
+        "Valor mensal com prorrogação do prazo pagamento", "Valor mensal c/ prorrogação", "Valor mensal prorrogado",
+    ],
+    "Retroativo de dissídio": ["Retroativo de dissídio", "Retroativo de dissidio"],
+    "Parcela (x/x)": ["Parcela (x/x)", "Parcela x/x", "Parcela(x/x)"],
+    "Valor extras validado Atlas": ["Valor extras validado Atlas", "Extras validados Atlas", "Valor extra Atlas"],
 }
 
 EXTRA_TOKEN_SETS = {
@@ -136,8 +155,17 @@ def _find_col_by_tokens(df: pd.DataFrame, token_sets: List[List[str]]) -> Option
     return None
 
 
-def map_columns(df: pd.DataFrame) -> Dict[str, Optional[str]]:
-    """Mapeia colunas de forma otimizada."""
+def map_columns(df: pd.DataFrame, warn_missing: bool = True) -> Dict[str, Optional[str]]:
+    """
+    Mapeia colunas de forma otimizada com validação.
+    
+    Args:
+        df: DataFrame com os dados
+        warn_missing: Se True, loga avisos sobre colunas críticas ausentes
+    
+    Returns:
+        Dicionário com mapeamento de colunas
+    """
     mapping = {key: _pick_column(df, cands) for key, cands in COLUMN_CANDIDATES.items()}
     
     # Fallback para Mês de emissão
@@ -150,7 +178,24 @@ def map_columns(df: pd.DataFrame) -> Dict[str, Optional[str]]:
                 break
     
     if mapping.get("Mes_Emissao_NF"):
-        mapping["Mes_Emissão_NF"] = mapping["Mes_Emissao_NF"]
+        mapping["Mês_Emissão_NF"] = mapping["Mes_Emissao_NF"]
+    
+    # ✅ VALIDAÇÃO: Verifica colunas críticas
+    if warn_missing:
+        critical_columns = {
+            "Unidade": "Unidade",
+            "Mes_Emissao_NF": "Mês de Emissão da NF", 
+            "Valor_Mensal_Final": "Valor Mensal Final"
+        }
+        
+        missing_critical = []
+        for key, display_name in critical_columns.items():
+            if not mapping.get(key):
+                missing_critical.append(display_name)
+        
+        if missing_critical:
+            print(f"[ERROR] Colunas críticas não encontradas: {', '.join(missing_critical)}")
+            print(f"[INFO] Colunas disponíveis na planilha: {list(df.columns)}")
     
     return mapping
 
@@ -169,7 +214,9 @@ def _vectorized_normalize_unit(series: pd.Series) -> pd.Series:
 
 
 def _to_decimal_sane_vectorized(series: pd.Series) -> pd.Series:
-    """Conversão vetorizada para Decimal."""
+    """Conversão vetorizada para Decimal com logging de erros."""
+    errors = []
+    
     def convert(x):
         if isinstance(x, Decimal):
             return x if not (x.is_nan() or x.is_infinite()) else Decimal("0")
@@ -177,10 +224,25 @@ def _to_decimal_sane_vectorized(series: pd.Series) -> pd.Series:
             return Decimal("0")
         try:
             return Decimal(str(x))
-        except:
+        except Exception as e:
+            # Registra erro para análise posterior
+            if len(errors) < 3:  # Limita a 3 exemplos para não inundar logs
+                errors.append(f"'{x}' ({type(x).__name__}): {str(e)}")
             return Decimal("0")
     
-    return series.apply(convert)
+    result = series.apply(convert)
+    
+    # Avisa sobre erros encontrados
+    if errors:
+        print(f"[WARN] {len(errors)} valor(es) numérico(s) falharam na conversão:")
+        for err in errors:
+            print(f"  - {err}")
+        # Check if there are more failed conversions than logged errors
+        total_failed = sum(1 for x in series if convert(x) == Decimal("0") and x is not None)
+        if total_failed > len(errors):
+            print(f"  ... e mais {total_failed - len(errors)} valores")
+    
+    return result
 
 
 def _format_horas_atrasos_vectorized(series: pd.Series) -> pd.Series:
@@ -258,7 +320,28 @@ def filter_and_prepare(
     ym: str,
     columns_whitelist: Optional[List[str]] = None,
 ) -> Tuple[List[Dict[str, Any]], List[str], Dict[str, Any]]:
-    """Filtra e prepara dados de forma otimizada."""
+    """
+    Filtra e prepara dados de uma planilha para geração de relatórios HTML.
+    
+    Esta função realiza:
+    1. Mapeamento de colunas da planilha para nomes canônicos
+    2. Filtragem por mês e unidade
+    3. Processamento de datas, valores monetários e horas
+    4. Extração de destinatários de email
+    5. Preparação de dados para renderização
+    
+    Args:
+        df: DataFrame com dados brutos da planilha
+        unidade: Nome da unidade a filtrar
+        ym: Mês de referência no formato YYYY-MM
+        columns_whitelist: Lista opcional de colunas a incluir no resultado
+    
+    Returns:
+        Tupla contendo:
+        - Lista de dicionários com linhas processadas
+        - Lista de emails de destinatários
+        - Dicionário de sumário (row_count, sum_valor_mensal_final)
+    """
     
     # 1. Mapeamento de colunas (uma vez)
     mapping = map_columns(df)
@@ -285,6 +368,24 @@ def filter_and_prepare(
     
     if dfu.empty:
         return [], [], {"row_count": 0, "sum_valor_mensal_final": 0.0}
+
+    # 3.5. Canonização de nomes de colunas usando sinônimos
+    # Mapeia variantes de nomes (ex: "Desconto Atrasos Validado Atlas") para canônicos
+    rename_map = {}
+    for canonical, synonyms in DISPLAY_HEADER_SYNONYMS.items():
+        for col in dfu.columns:
+            if _norm(col) == _norm(canonical):
+                # Nome já canônico
+                break
+            elif col not in rename_map:  # Evita sobrescrever se já mapeado
+                for syn in synonyms:
+                    if _norm(col) == _norm(syn):
+                        rename_map[col] = canonical
+                        break
+    
+    if rename_map:
+        dfu.rename(columns=rename_map, inplace=True)
+
 
     # 4. Processamento de colunas canônicas
     # Mês de emissão da NF (formato MM/YY) e Mês referência (sempre anterior)
@@ -315,13 +416,20 @@ def filter_and_prepare(
         lambda x: _format_mmyy(parse_year_month(x) or ym)
     )
 
-    # Força Mês de Referência como (Mês da NF - 1)
-    # Nota: Usamos 'ym' (que é o filtro do mês da NF) como base se a linha não tiver data válida
-    ref_ym = _get_prev_month(ym)
-    ref_formatted = _format_mmyy(ref_ym)
+    # Processa Mês de Referência para Faturamento
+    # ✅ NOVA LÓGICA: Respeita o valor da planilha quando disponível
+    ref_col_name = mapping.get("Mes_Ref_Faturamento")
     
-    # Se a coluna existir, sobrescrevemos. Se não, criamos.
-    dfu["Mês referência para faturamento"] = ref_formatted
+    if ref_col_name and ref_col_name in dfu.columns:
+        # ✅ Coluna existe na planilha: usa os valores e apenas formata
+        dfu["Mês referência para faturamento"] = dfu[ref_col_name].apply(
+            lambda x: _format_mmyy(parse_year_month(x) or _get_prev_month(ym))
+        )
+    else:
+        # ✅ Coluna não existe: calcula como (Mês da NF - 1)
+        ref_ym = _get_prev_month(ym)
+        ref_formatted = _format_mmyy(ref_ym)
+        dfu["Mês referência para faturamento"] = ref_formatted
     
     # Valor Mensal Final (vetorizado)
     if vmf_col and vmf_col in dfu.columns:
@@ -330,6 +438,11 @@ def filter_and_prepare(
         dfu["_vmf_num"] = Decimal("0")
 
     dfu["Valor Mensal Final"] = dfu["_vmf_num"].apply(fmt_brl)
+
+    # Validação de valores monetários suspeitos
+    negatives = dfu[dfu["_vmf_num"] < 0]
+    if not negatives.empty:
+        print(f"[WARN] Valor Mensal Final negativo detectado na unidade '{unidade}': {negatives['_vmf_num'].tolist()}")
 
     # Horas Atrasos (vetorizada)
     if "Horas Atrasos" in dfu.columns:
@@ -343,7 +456,8 @@ def filter_and_prepare(
     if email_col and email_col in dfu.columns:
         raw = dfu[email_col].dropna().astype(str).tolist()
         for cell in raw:
-            recipients.extend(split_emails(cell) or [])
+            # ✅ Validação integrada em split_emails
+            recipients.extend(split_emails(cell, warn=True) or [])
         recipients = list(dict.fromkeys(recipients))  # Remove duplicatas mantendo ordem
     
     # 7. Montagem de colunas de display

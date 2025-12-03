@@ -1,0 +1,625 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================================
+   ATLAS INOVAÇÕES - PORTAL PERFORMANCE
+   Design System: Glassmorphism Premium
+   ============================================================================ */
+
+:root {
+  /* Typography */
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  
+  /* Color Scheme */
+  color-scheme: light;
+  
+  /* Atlas Brand Colors */
+  --atlas-blue: #2F4F71;
+  --atlas-blue-dark: #1e3a5f;
+  --atlas-accent: #3b82f6;
+  --atlas-accent-light: #60a5fa;
+  --atlas-accent-glow: rgba(59, 130, 246, 0.4);
+  
+  /* Background Gradients */
+  --bg-gradient-start: #e0f2fe;
+  --bg-gradient-end: #f0f4f8;
+  --bg-gradient-accent: #dbeafe;
+  
+  /* Glass Effect */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg-hover: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-border-accent: rgba(59, 130, 246, 0.3);
+  --glass-blur: 20px;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.15);
+  --shadow-glow-strong: 0 0 60px rgba(59, 130, 246, 0.25);
+  
+  /* Text Colors */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  
+  /* Footer */
+  --footer-bg: #020617;
+  
+  color: var(--text-primary);
+  background-color: var(--bg-gradient-end);
+  
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: 
+    radial-gradient(ellipse at 20% 20%, var(--bg-gradient-start) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, var(--bg-gradient-accent) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 70%),
+    linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  background-attachment: fixed;
+  position: relative;
+}
+
+/* Subtle grid pattern overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Floating orbs effect */
+body::after {
+  content: '';
+  position: fixed;
+  top: 10%;
+  right: 10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  animation: float-orb 20s ease-in-out infinite;
+}
+
+@keyframes float-orb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-30px, 20px) scale(1.05); }
+  50% { transform: translate(20px, -30px) scale(0.95); }
+  75% { transform: translate(-20px, -20px) scale(1.02); }
+}
+
+/* ============================================================================
+   GLASS COMPONENTS
+   ============================================================================ */
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  box-shadow: var(--shadow-md), var(--shadow-glow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  background: var(--glass-bg-hover);
+  box-shadow: var(--shadow-lg), var(--shadow-glow-strong);
+  transform: translateY(-2px);
+}
+
+.glass-card-static {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  box-shadow: var(--shadow-md);
+}
+
+.glass-navbar {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+.glass-sidebar {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.2s ease;
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: var(--atlas-accent);
+  box-shadow: 0 0 0 3px var(--atlas-accent-glow);
+  outline: none;
+}
+
+/* ============================================================================
+   BUTTONS
+   ============================================================================ */
+
+.btn-atlas-primary {
+  background: linear-gradient(135deg, var(--atlas-accent) 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+}
+
+.btn-atlas-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.45);
+}
+
+.btn-atlas-primary:active {
+  transform: translateY(0);
+}
+
+.btn-atlas-secondary {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  color: var(--atlas-blue);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-atlas-secondary:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--atlas-accent);
+}
+
+/* ============================================================================
+   SIDEBAR NAVIGATION
+   ============================================================================ */
+
+.nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  margin: 4px 8px;
+  border-radius: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.nav-item:hover {
+  background: rgba(59, 130, 246, 0.08);
+  color: var(--atlas-accent);
+}
+
+.nav-item.active {
+  background: rgba(59, 130, 246, 0.12);
+  color: var(--atlas-accent);
+  font-weight: 600;
+}
+
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 24px;
+  background: linear-gradient(180deg, var(--atlas-accent) 0%, var(--atlas-accent-light) 100%);
+  border-radius: 0 4px 4px 0;
+  box-shadow: 0 0 12px var(--atlas-accent-glow);
+}
+
+.nav-item.active .nav-icon {
+  filter: drop-shadow(0 0 8px var(--atlas-accent-glow));
+}
+
+/* ============================================================================
+   KPI CARDS (Glass Jewels)
+   ============================================================================ */
+
+.kpi-card-glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.kpi-card-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--kpi-color, var(--atlas-accent));
+  border-radius: 20px 20px 0 0;
+}
+
+.kpi-card-glass::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, var(--kpi-glow, rgba(59, 130, 246, 0.1)) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.kpi-card-glass:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg), 0 0 40px var(--kpi-glow, rgba(59, 130, 246, 0.2));
+}
+
+.kpi-card-glass.blue { --kpi-color: #3b82f6; --kpi-glow: rgba(59, 130, 246, 0.15); }
+.kpi-card-glass.green { --kpi-color: #10b981; --kpi-glow: rgba(16, 185, 129, 0.15); }
+.kpi-card-glass.red { --kpi-color: #ef4444; --kpi-glow: rgba(239, 68, 68, 0.15); }
+.kpi-card-glass.purple { --kpi-color: #8b5cf6; --kpi-glow: rgba(139, 92, 246, 0.15); }
+.kpi-card-glass.amber { --kpi-color: #f59e0b; --kpi-glow: rgba(245, 158, 11, 0.15); }
+
+/* ============================================================================
+   DROPZONE
+   ============================================================================ */
+
+.dropzone-glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 2px dashed rgba(59, 130, 246, 0.4);
+  border-radius: 24px;
+  padding: 60px 40px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.dropzone-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.dropzone-glass:hover,
+.dropzone-glass.active {
+  border-color: var(--atlas-accent);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.2);
+}
+
+.dropzone-glass:hover::before,
+.dropzone-glass.active::before {
+  opacity: 1;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* ============================================================================
+   TOGGLES
+   ============================================================================ */
+
+.toggle-atlas {
+  position: relative;
+  width: 48px;
+  height: 26px;
+  background: #e2e8f0;
+  border-radius: 13px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle-atlas.active {
+  background: linear-gradient(135deg, var(--atlas-accent) 0%, #2563eb 100%);
+  box-shadow: 0 0 16px var(--atlas-accent-glow);
+}
+
+.toggle-atlas::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggle-atlas.active::after {
+  transform: translateX(22px);
+}
+
+/* ============================================================================
+   ACCORDION/FAQ
+   ============================================================================ */
+
+.accordion-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.accordion-glass:hover {
+  background: var(--glass-bg-hover);
+}
+
+.accordion-glass.open {
+  box-shadow: var(--shadow-md), var(--shadow-glow);
+}
+
+.accordion-header {
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.accordion-content {
+  padding: 0 24px 20px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ============================================================================
+   BANNER/HERO SECTIONS
+   ============================================================================ */
+
+.hero-glass {
+  background: linear-gradient(135deg, rgba(47, 79, 113, 0.95) 0%, rgba(30, 58, 95, 0.95) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 48px;
+  position: relative;
+  overflow: hidden;
+  color: white;
+}
+
+.hero-glass::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 60%;
+  height: 200%;
+  background: radial-gradient(ellipse, rgba(59, 130, 246, 0.2) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-glass::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 40%;
+  height: 150%;
+  background: radial-gradient(ellipse, rgba(96, 165, 250, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* ============================================================================
+   SCROLLBAR
+   ============================================================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.5);
+}
+
+/* ============================================================================
+   ANIMATIONS
+   ============================================================================ */
+
+/* Toast animation */
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.4s ease-out;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes float { 
+  0% { transform: translate(0, 0); } 
+  100% { transform: translate(30px, 50px); } 
+}
+
+.animate-float {
+  animation: float 15s infinite alternate ease-in-out;
+}
+
+/* ============================================================================
+   SELECTION ITEMS (Units list)
+   ============================================================================ */
+
+.selection-item-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.selection-item-glass:hover {
+  background: var(--glass-bg-hover);
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+.selection-item-glass.selected {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: var(--atlas-accent);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+}
+
+.selection-item-glass.selected::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--atlas-accent) 0%, var(--atlas-accent-light) 100%);
+  border-radius: 12px 0 0 12px;
+}
+
+/* ============================================================================
+   FOOTER
+   ============================================================================ */
+
+.footer-atlas {
+  background: var(--footer-bg);
+  color: white;
+  padding: 60px 0 30px;
+  margin-top: auto;
+}
+
+.footer-atlas a {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-atlas a:hover {
+  color: white;
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .glass-card {
+    border-radius: 16px;
+  }
+  
+  .kpi-card-glass {
+    padding: 20px;
+  }
+  
+  .hero-glass {
+    padding: 32px 24px;
+    border-radius: 20px;
+  }
+}

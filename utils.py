@@ -165,13 +165,32 @@ MISSING_VALUES = frozenset({"", "nan", "inf", "+inf", "-inf", "infinity", "+infi
 
 
 def is_missing_like(x: Any) -> bool:
-    """Verifica se valor é missing (otimizado)."""
+    """
+    Verifica se valor é missing/ausente (otimizado).
+    
+    Considera como missing:
+    - None
+    - NaN e Inf (float)
+    - Strings vazias
+    - Valores em MISSING_VALUES ("nan", "inf", etc.)
+    - Placeholders normalizados (PENDENTE_LABELS_NORMALIZED)
+    """
     if x is None:
         return True
     if isinstance(x, float):
         return math.isnan(x) or math.isinf(x)
-    s = str(x).strip().lower()
-    return s in MISSING_VALUES
+    
+    s = str(x).strip()
+    if not s:  # String vazia
+        return True
+    
+    low = s.lower()
+    if low in MISSING_VALUES:
+        return True
+    
+    # Verifica placeholders normalizados
+    norm = _normalize_placeholder_label_cached(s)
+    return norm in PENDENTE_LABELS_NORMALIZED
 
 
 @lru_cache(maxsize=256)
@@ -221,12 +240,17 @@ def normalize_unit(s: str) -> str:
 # ==========================
 # Datas (otimizado com regex pré-compilados)
 # ==========================
-def parse_year_month(s: Optional[str]) -> Optional[str]:
-    """Parse de ano/mês otimizado."""
+@lru_cache(maxsize=1024)
+def parse_year_month(s: Any, warn: bool = False) -> Optional[str]:
+    """
+    Tenta extrair YYYY-MM de uma string variada.
+    Retorna None se falhar.
+    """
     if not s:
         return None
     
-    s = str(s).replace("\u00A0", " ").strip()
+    s_orig = s
+    s = str(s).strip()
     if not s:
         return None
 
@@ -280,6 +304,8 @@ def parse_year_month(s: Optional[str]) -> Optional[str]:
         except Exception:
             pass
 
+    if warn:
+        print(f"[WARN] Falha ao parsear data: '{s_orig}'")
     return None
 
 
@@ -565,7 +591,7 @@ def to_base64_image(img_path: Path) -> Optional[str]:
 # ==========================
 # E-mails
 # ==========================
-def split_emails(s: str) -> List[str]:
+def split_emails(s: str, warn: bool = False) -> List[str]:
     """Split de emails otimizado."""
     s = (s or "").replace(",", ";").replace("|", ";").replace("\n", ";").replace("\r", ";")
     parts = [p.strip() for p in s.split(";") if p.strip()]
@@ -582,6 +608,8 @@ def split_emails(s: str) -> List[str]:
             if pl not in seen:
                 seen.add(pl)
                 good.append(p)
+        elif warn:
+            print(f"[WARN] Email inválido descartado: '{p}'")
     
     return good
 

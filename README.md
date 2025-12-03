@@ -1,12 +1,43 @@
-# Automatização de E-mail de Faturamento (Atlas Inovações)
+# Portal Performance - Sistema de Faturamento
 
-**Pronto para rodar**: leitura de Excel por região, filtragem por unidade e mês, geração de HTML (com destaque de pendências), dry-run, envio real via Outlook e logs em SQLite.
+**Sistema automatizado de envio de medições** para shoppings, com interface web moderna e API REST.
+
+## 🚀 Início Rápido
+
+### Windows (Recomendado)
+```bash
+# Clique duplo em start.bat ou execute:
+start.bat
+```
+
+O script irá:
+1. ✅ Verificar Python e Node.js
+2. ✅ Criar ambiente virtual (se necessário)
+3. ✅ Instalar dependências automaticamente
+4. ✅ Iniciar Backend (http://localhost:8000)
+5. ✅ Iniciar Frontend (http://localhost:5173)
+6. ✅ Abrir navegador
+
+### Manual
+```bash
+# Backend
+cd backend
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+
+# Frontend (novo terminal)
+cd frontend
+npm install
+npm run dev
+```
 
 ## Requisitos
 - Python 3.10+
-- `pip install -r requirements.txt`
+- Node.js 18+
+- **Para envio via SendGrid** (recomendado): API Key do SendGrid ([ver guia](SENDGRID_CONFIG.md))
 - **Para envio via Outlook**: Windows com Outlook instalado
-- **Para envio via SendGrid** (recomendado): API Key do SendGrid ([ver guia completo](SENDGRID_SETUP.md))
 
 ## Estrutura
 ```text
@@ -61,12 +92,22 @@ SENDER_NAME=Seu Nome
 ```
 
 ## Como rodar (exemplos)
-- **Dry-run** para 1 unidade:
-  ```bash
- python -m streamlit run .\portal_streamlit\app.py
 
-  ```
-  → Gera `output_html/Passeio_Shopping_2025-08.html` sem enviar e-mail.
+### Interface Web (Recomendado)
+```bash
+# Backend
+cd backend && uvicorn app.main:app --reload
+
+# Frontend (em outro terminal)
+cd frontend && npm run dev
+```
+Acesse: http://localhost:5173
+
+### CLI - Dry-run para 1 unidade:
+```bash
+python main.py --regiao SP1 --unidade "Shopping X" --mes 2025-11 --xlsx-dir "D:\Planilhas" --dry-run
+```
+→ Gera `output_html/Shopping_X_2025-11.html` sem enviar e-mail.
 
 - **Dry-run** para todas as unidades de uma região (mês padrão: anterior ao atual ou conforme `.env`):
   ```bash

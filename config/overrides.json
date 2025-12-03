@@ -12,18 +12,8 @@
       "Desc. Atraso Validado Atlas",
       "Desconto SLA Mês",
       "Valor Mensal Final",
-      "Mês de emissão da NF",
-      "Desconto SLA Retroativo",
-      "Desconto Equipamentos",
-      "Prêmio Assiduidade",
-      "Outros descontos",
-      "Taxa de prorrogação do prazo pagamento",
-      "Valor mensal com prorrogação do prazo pagamento",
-      "Retroativo de dissídio",
-      "Parcela (x/x)",
-      "Valor extras validado Atlas"
-
-      
+      "Mês de referência para faturamento",
+      "Mês de emissão da NF"
     ],
     "copy": {
       "COPY_INTRO": "Encaminhamos a medição mensal referente à {{ unidade }}. Lembramos que, antes da emissão da NF, a medição deve ser validada pela Atlas. Ressaltamos ainda que o SLA também é considerado no relatório mensal apresentado à diretoria. Solicitamos, portanto, a validação da medição e, havendo divergências, o envio das ocorrências de faltas e atrasos.",
@@ -35,7 +25,7 @@
   "regions": {
     "RJ": {
       "copy": {
-        "COPY_OBS":"Observação: caso a Nota Fiscal já tenha sido emitida sem considerar os descontos ora apontados, os valores poderão ser objeto de desconto retroativo na competência subsequente."
+        "COPY_OBS": "Observação: caso a Nota Fiscal já tenha sido emitida sem considerar os descontos ora apontados, os valores poderão ser objeto de desconto retroativo na competência subsequente."
       }
     }
   },
@@ -53,6 +43,7 @@
         "Desc. Atraso Validado Atlas",
         "Desconto SLA Mês",
         "Valor Mensal Final",
+        "Mês de referência para faturamento",
         "Mês de emissão da NF"
       ],
       "copy": {
@@ -62,9 +53,26 @@
     },
     "Shopping X": {
       "month_reference": "offset:-2M"
+    },
+    "Caxias Shopping": {
+      "visible_columns": [
+        "Unidade",
+        "Categoria",
+        "Fornecedor",
+        "HC Planilha",
+        "Dias Faltas",
+        "Horas Atrasos",
+        "Valor Planilha",
+        "Desc. Falta Validado Atlas",
+        "Desc. Atraso Validado Atlas",
+        "Desconto SLA Mês",
+        "Valor Mensal Final",
+        "Mês de referência para faturamento",
+        "Mês de emissão da NF",
+        "Taxa de prorrogação do prazo pagamento",
+        "Valor mensal com prorrogação do prazo pagamento"
+      ],
+      "month_reference": "auto"
     }
   }
 }
-
-
-

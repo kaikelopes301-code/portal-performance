@@ -5,7 +5,9 @@ import urllib.parse
 import platform
 import unicodedata
 
-from utils import to_base64_image, fmt_brl, fmt_percentage, normalize_text_full
+from utils import to_base64_image, fmt_brl, fmt_percentage, normalize_text_full, is_missing_like
+
+from processor import DISPLAY_HEADER_SYNONYMS
 
 SLA_DISCOUNT_CANONICAL = "Desconto SLA Mês"
 SLA_DISCOUNT_COLUMN_ALIASES = {
@@ -36,26 +38,14 @@ COLUMN_ALIASES: Dict[str, set] = {
         "Mês de emissão da NF", "Mes de emissao da NF", "mes de emissao da nf",
         "Mês NF", "Mes NF", "mes nf",
     },
-    "Desconto SLA Retroativo": {
-        "Desc. SLA Retroativo","Desc SLA Retroativo","Retroativo SLA (desconto)","Retroativo SLA",
-    "Desconto Retroativo SLA","SLA Retroativo (desconto)","SLA desconto retroativo","SLA - Desconto Retroativo",
-    "Desconto SLA (Retroativo)","Retroativo (SLA)","RETROATIVO SLA",
-    # 👇 novos apelidos abreviados
-    "Desc. SLA Ret.","Desc SLA Ret","SLA Ret.","Retro. SLA","SLA retro","Desconto SLA Ret"
-    },
-    "Desconto Equipamentos": {"Desconto Equipamentos", "Desc Equipamentos", "Desc. Equipamentos"},
-    "Prêmio Assiduidade": {"Prêmio Assiduidade", "Premio Assiduidade", "Prêmio de Assiduidade"},
-    "Outros descontos": {"Outros descontos", "Outros Descontos", "Outros desc."},
-    "Taxa de prorrogação do prazo pagamento": {
-        "Taxa de prorrogação do prazo pagamento", "Taxa prorrogação prazo pagamento", "Taxa prorrogação",
-    },
-    "Valor mensal com prorrogação do prazo pagamento": {
-        "Valor mensal com prorrogação do prazo pagamento", "Valor mensal c/ prorrogação", "Valor mensal prorrogado",
-    },
-    "Retroativo de dissídio": {"Retroativo de dissídio", "Retroativo de dissidio"},
-    "Parcela (x/x)": {"Parcela (x/x)", "Parcela x/x", "Parcela(x/x)"},
-    "Valor extras validado Atlas": {"Valor extras validado Atlas", "Extras validados Atlas", "Valor extra Atlas"},
 }
+
+# Incorpora sinônimos consolidados do processor para evitar duplicação
+for canon, aliases in DISPLAY_HEADER_SYNONYMS.items():
+    if canon not in COLUMN_ALIASES:
+        COLUMN_ALIASES[canon] = set()
+    COLUMN_ALIASES[canon].update(aliases)
+    COLUMN_ALIASES[canon].add(canon)
 
 def _norm_txt(s: Optional[str]) -> str:
     """Normaliza texto: remove acentos, espaços extras, travessões, lowercase.
@@ -430,22 +420,6 @@ class Emailer:
         soma_fmt = fmt_brl(sum_vmf_num)
 
         # -------- Saneamento final das linhas --------
-        def _is_missing_like_local(v: Any) -> bool:
-            if v is None:
-                return True
-            try:
-                import math as _m
-                if isinstance(v, float) and (_m.isnan(v) or _m.isinf(v)):
-                    return True
-            except Exception:
-                pass
-            s = str(v).strip()
-            if not s:
-                return True
-            low = s.lower()
-            norm = "".join(ch for ch in unicodedata.normalize("NFKD", low) if not unicodedata.combining(ch))
-            return norm in {"informacao pendente", "informação pendente", "preenchimento pendente", "nan"}
-
         def _sanitize_rows(rs: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
             out: List[Dict[str, Any]] = []
             for r in rs or []:
@@ -463,57 +437,49 @@ class Emailer:
                 row = new_row
 
 
-                # Formata colunas de mês para MM/AAAA
+                # ✅ SIMPLIFICADO: Formata colunas de mês para MM/YY
                 for k in list(row.keys()):
                     if k in ["Mês de referência para faturamento", "Mês de emissão da NF"]:
                         val = row.get(k)
-                        if val:
-                            vstr = str(val)
-                            # LOG TEMPORÁRIO: printa o valor bruto para debug
-                            if k == "Mês de referência para faturamento":
-                                print(f"[DEBUG] Valor bruto '{k}': {vstr}")
-                            import re
-                            from utils import parse_year_month
-                            
-                            # Se já estiver no formato MM/YY (ex: 11/25), mantemos
-                            if re.match(r"^\d{2}/\d{2}$", vstr):
-                                row[k] = vstr
-                            # Se estiver no formato "Janeiro/2025" (contém letras), mantemos
-                            elif any(c.isalpha() for c in vstr):
-                                row[k] = vstr
-                            else:
-                                # Tenta parsear e converter para MM/YY se necessário, 
-                                # mas como o processor já manda formatado, aqui é só fallback
-                                parsed = parse_year_month(vstr)
-                                if parsed:
-                                    # Converte YYYY-MM para MM/YY
-                                    try:
-                                        y, m = parsed.split('-')
-                                        row[k] = f"{m}/{y[2:]}"
-                                    except:
-                                        row[k] = vstr
-                                else:
-                                    # Fallback seguro
-                                    row[k] = vstr
-                        else:
+                        if not val:
                             row[k] = ""
+                            continue
+                        
+                        vstr = str(val).strip()
+                        
+                        # Se já está em formato válido (MM/YY ou contém texto), mantém
+                        import re
+                        if re.match(r"^\d{2}/\d{2,4}$", vstr) or any(c.isalpha() for c in vstr):
+                            row[k] = vstr
+                        else:
+                            # Tenta parsear e formatar para MM/YY
+                            from utils import parse_year_month
+                            parsed = parse_year_month(vstr)
+                            if parsed:
+                                try:
+                                    y, m = parsed.split('-')
+                                    row[k] = f"{m}/{y[2:]}"  # MM/YY
+                                except:
+                                    row[k] = vstr  # Fallback seguro
+                            else:
+                                row[k] = vstr  # Fallback seguro
                     elif k in self.TABLE_MONEY_COLUMNS:
                         val = row.get(k)
                         if k == "Desconto SLA Retroativo":
-                            if _is_missing_like_local(val):
+                            if is_missing_like(val):
                                 row[k] = ""
                             else:
                                 s = str(val).strip()
                                 row[k] = s
                             continue
-                        if _is_missing_like_local(val):
+                        if is_missing_like(val):
                             row[k] = "" if val is None else str(val).strip()
                         else:
                             s = str(val).strip()
                             row[k] = s if s.startswith("R$") else fmt_brl(val)
                     elif k in self.TABLE_PERCENTAGE_COLUMNS:
                         val = row.get(k)
-                        if _is_missing_like_local(val):
+                        if is_missing_like(val):
                             row[k] = "" if val is None else str(val).strip()
                         else:
                             row[k] = fmt_percentage(val)

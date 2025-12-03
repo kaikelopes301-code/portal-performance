@@ -1,8 +1,77 @@
-# Arquivos grandes
-projeto.zip
-*.zip
+# === Ambiente Python ===
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
 
-# Variaveis de ambiente
+# === Variáveis de ambiente ===
 .env
+.env.local
+.env.*.local
 
+# === Bancos de dados ===
+*.db
+*.sqlite
+*.sqlite3
 
+# === IDEs e Editores ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# === Arquivos do Sistema ===
+.DS_Store
+Thumbs.db
+desktop.ini
+nul
+
+# === Node/Frontend ===
+node_modules/
+frontend/dist/
+frontend/.vite/
+*.log
+
+# === Arquivos temporários ===
+*.tmp
+*.temp
+*.bak
+~$*
+
+# === Arquivos grandes ===
+*.zip
+*.tar.gz
+projeto.zip
+
+# === Outputs gerados ===
+output_html/
+uploads/
+backend/uploads/
+backend/output/
+backend/data/
+
+# === Planilhas (dados dinâmicos) ===
+planilhas/*.xlsx
+planilhas/*.xls
+planilhas/~$*
+
+# === Cache ===
+.pytest_cache/
+.mypy_cache/
+.streamlit/
+
+# === Logs ===
+*.log
+build_log.txt
+build_error*.log
+
+# === Config Backups ===
+config/backups/

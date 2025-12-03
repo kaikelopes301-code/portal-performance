@@ -1,0 +1,14 @@
+{
+  "templates": {
+    "email_template_dark": {
+      "name": "Template Padrão (Dark)",
+      "description": "Template premium com tema escuro para relatórios de medição",
+      "filename": "email_template_dark.html",
+      "subject_template": "Medição {unidade} - {mes_ref}",
+      "is_active": true,
+      "created_at": "2025-01-01T00:00:00",
+      "updated_at": null
+    }
+  },
+  "default_template": "email_template_dark"
+}

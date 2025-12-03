@@ -1,7 +1,7 @@
 2. Instalação das Dependências
 Abra o terminal na pasta do projeto e execute:
 
-## pip install -r requirements.txt  , pip install -r portal_streamlit/requirements.txt
+## pip install -r requirements.txt  , pip install -r backend/requirements.txt , cd frontend && npm install
 
 Dica: Recomendo usar um ambiente virtual (python -m venv venv).
 
@@ -29,9 +29,15 @@ SENDER_EMAIL=seu-email@empresa.com
 SENDER_NAME=Seu Nome
 
 4. Como Executar
-Interface Web (Streamlit):
 
-## python -m streamlit run portal_streamlit/app.py
+### Interface Web (Recomendado):
+
+## cd backend && uvicorn app.main:app --reload
+## cd frontend && npm run dev
+
+Acesse: http://localhost:5173
+
+### CLI (Linha de Comando):
 
 Envio real:
 

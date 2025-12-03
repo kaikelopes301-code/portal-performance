@@ -1,6 +1,20 @@
+"""
+Script principal de orquestração do faturamento.
+
+PRECEDÊNCIA DE CONFIGURAÇÃO (da maior para a menor prioridade):
+1. Overrides por Unidade (JSON): Define mês específico, textos personalizados e contatos por unidade.
+   - Caminho: --portal-overrides-path ou config/overrides.json
+2. CLI Arguments: --units, --columns, --mes, --regiao. Sobrescrevem seleções globais.
+3. Overrides Globais (JSON): config/overrides.json. Define colunas padrão e textos gerais.
+4. Environment Variables (.env): Credenciais, caminhos de banco, defaults de infra.
+5. Defaults do Código: Valores hardcoded para fallbacks finais.
+"""
+
 import argparse
 import json
+import time
 import sys
+import logging
 import webbrowser
 import warnings
 from datetime import date
@@ -460,10 +474,10 @@ def main() -> None:
     total_processed = 0
     errors = 0
 
-    # Carrega overrides do portal (texto por unidade)
+    # Carrega overrides (texto por unidade)
     portal_overrides: Dict[str, Any] = {}
-    # default: procurar no diretório do portal
-    default_portal_path = project_root / "portal_streamlit" / "data" / "overrides.json"
+    # default: procurar em config/overrides.json
+    default_portal_path = project_root / "config" / "overrides.json"
     portal_path = None
     if args.portal_overrides_path:
         portal_path = Path(args.portal_overrides_path)
@@ -605,8 +619,10 @@ def main() -> None:
             if summary.get("fallback_used"):
                 print("[WARN] Nenhuma coluna configurada disponivel; usando colunas de seguranca.")
 
-            if not recipients and fallback_email:
-                recipients = [fallback_email]
+            if not recipients:
+                if fallback_email:
+                    print(f"[WARN] Nenhum destinatário encontrado para '{unidade}'. Usando FALLBACK_EMAIL: {fallback_email}")
+                    recipients = [fallback_email]
 
             destinatarios_display = "; ".join(recipients)
 
