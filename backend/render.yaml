@@ -5,6 +5,8 @@ services:
     region: oregon
     plan: free
     buildCommand: |
+      export CARGO_HOME=/opt/render/project/.cargo
+      mkdir -p "$CARGO_HOME/registry"
       cd backend
       pip install --upgrade pip
       pip install -r requirements.txt
@@ -12,4 +14,4 @@ services:
     healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11.8
+        value: 3.11.11
