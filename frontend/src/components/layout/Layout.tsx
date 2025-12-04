@@ -1,7 +1,8 @@
-import { LayoutDashboard, Settings, Send, Eye, HelpCircle, Menu, X } from "lucide-react"
-import { Link, useLocation } from "react-router-dom"
+import { LayoutDashboard, Settings, Send, Eye, HelpCircle, Menu, X, LogOut } from "lucide-react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { cn } from "@/utils/cn"
 import { useState, useEffect } from "react"
+import { useAuth } from "@/contexts/AuthContext"
 
 const navigation = [
     { name: "Dashboard", href: "/", icon: LayoutDashboard },
@@ -13,8 +14,15 @@ const navigation = [
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const location = useLocation()
+    const navigate = useNavigate()
+    const { logout } = useAuth()
     const [scrolled, setScrolled] = useState(false)
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+    const handleLogout = () => {
+        logout()
+        navigate('/login', { replace: true })
+    }
 
     useEffect(() => {
         const handleScroll = () => {
@@ -72,6 +80,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
                     {/* Right Actions */}
                     <div className="flex items-center gap-4">
+                        {/* Logout Button - Desktop */}
+                        <button
+                            onClick={handleLogout}
+                            className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-300"
+                            title="Sair"
+                        >
+                            <LogOut className="h-4 w-4" />
+                            <span>Sair</span>
+                        </button>
+                        
                         {/* Mobile Menu Button */}
                         <button 
                             className="md:hidden p-2 text-gray-600"
@@ -103,6 +121,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                 {item.name}
                             </Link>
                         ))}
+                        
+                        {/* Logout Button - Mobile */}
+                        <button
+                            onClick={() => {
+                                setMobileMenuOpen(false)
+                                handleLogout()
+                            }}
+                            className="flex items-center gap-4 p-4 rounded-xl text-lg font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors mt-4 border-t border-gray-200 dark:border-gray-700 pt-8"
+                        >
+                            <LogOut className="h-6 w-6" />
+                            Sair
+                        </button>
                     </div>
                 </div>
             )}
