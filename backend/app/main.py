@@ -212,8 +212,9 @@ def root():
 def health_check():
     return {"status": "ok", "version": "2.0.0"}
 
-from app.routers import upload, jobs, config, process, templates, schedules, preview, logs
+from app.routers import upload, jobs, config, process, templates, schedules, preview, logs, auth
 
+app.include_router(auth.router)
 app.include_router(upload.router)
 app.include_router(jobs.router)
 app.include_router(process.router)

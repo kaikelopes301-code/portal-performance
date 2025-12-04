@@ -71,13 +71,43 @@ const getCurrentMonth = (): string => {
 }
 
 // Cores por região
-const REGION_COLORS: Record<string, { gradient: string, bg: string, text: string, border: string }> = {
-    'RJ': { gradient: 'from-emerald-500 to-green-600', bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-200' },
-    'SP1': { gradient: 'from-blue-500 to-indigo-600', bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200' },
-    'SP2': { gradient: 'from-violet-500 to-purple-600', bg: 'bg-violet-50', text: 'text-violet-700', border: 'border-violet-200' },
-    'SP3': { gradient: 'from-amber-500 to-orange-600', bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-200' },
-    'NNE': { gradient: 'from-rose-500 to-red-600', bg: 'bg-rose-50', text: 'text-rose-700', border: 'border-rose-200' }
-}
+export const REGION_COLORS: Record<
+  string,
+  { gradient: string; bg: string; text: string; border: string }
+> = {
+  RJ: {
+    gradient: 'from-emerald-600 to-emerald-800',
+    bg: 'bg-emerald-50',
+    text: 'text-emerald-900',
+    border: 'border-emerald-100',
+  },
+  SP1: {
+    gradient: 'from-sky-600 to-indigo-700',
+    bg: 'bg-sky-50',
+    text: 'text-sky-900',
+    border: 'border-sky-100',
+  },
+  SP2: {
+    gradient: 'from-indigo-600 to-indigo-800',
+    bg: 'bg-indigo-50',
+    text: 'text-indigo-900',
+    border: 'border-indigo-100',
+  },
+  SP3: {
+    gradient: 'from-amber-600 to-amber-700',
+    bg: 'bg-amber-50',
+    text: 'text-amber-900',
+    border: 'border-amber-100',
+  },
+  NNE: {
+    gradient: 'from-rose-600 to-rose-800',
+    bg: 'bg-rose-50',
+    text: 'text-rose-900',
+    border: 'border-rose-100',
+  },
+};
+
+
 
 export default function ExecutionPage() {
     const navigate = useNavigate()

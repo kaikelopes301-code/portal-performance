@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { api, getToken, setToken, clearToken } from '../services/api'
 
 interface AuthContextType {
     isAuthenticated: boolean
@@ -7,57 +8,59 @@ interface AuthContextType {
     logout: () => void
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined)
-
-async function hashString(str: string): Promise<string> {
-    const encoder = new TextEncoder()
-    const data = encoder.encode(str + 'atlas_salt_2025_secure')
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data)
-    const hashArray = Array.from(new Uint8Array(hashBuffer))
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
+interface LoginResponse {
+    success: boolean
+    access_token?: string
+    token_type?: string
+    expires_in?: number
+    message?: string
 }
+
+interface AuthStatusResponse {
+    authenticated: boolean
+    user?: string
+    message: string
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        // Verifica se há sessão válida ao carregar
-        const session = localStorage.getItem('atlas_session')
-        const sessionExpiry = localStorage.getItem('atlas_session_expiry')
-        
-        if (session && sessionExpiry) {
-            const expiry = new Date(sessionExpiry)
-            if (expiry > new Date()) {
-                setIsAuthenticated(true)
-            } else {
-                // Sessão expirada
-                localStorage.removeItem('atlas_session')
-                localStorage.removeItem('atlas_session_expiry')
+        // Verifica se há token válido ao carregar
+        const checkAuth = async () => {
+            const token = getToken()
+            
+            if (token) {
+                try {
+                    // Valida o token com o backend
+                    const response = await api.get<AuthStatusResponse>('/api/auth/status')
+                    setIsAuthenticated(response.authenticated)
+                } catch {
+                    // Token inválido ou expirado
+                    clearToken()
+                    setIsAuthenticated(false)
+                }
             }
+            
+            setIsLoading(false)
         }
-        setIsLoading(false)
+        
+        checkAuth()
     }, [])
 
     const login = async (username: string, password: string): Promise<boolean> => {
         try {
-            const userHash = await hashString(username.toLowerCase().trim())
-            const passHash = await hashString(password)
+            const response = await api.post<LoginResponse>('/api/auth/login', {
+                username: username.trim(),
+                password
+            })
             
-            // Validação local com hashes (credenciais hardcoded de forma segura)
-            // Usuário: atlas.admin@performance | Senha: Atl@s#P3rf0rm@nc3!2025$Secure
-            const validUserHash = await hashString('atlas.admin@performance')
-            const validPassHash = await hashString('Atl@s#P3rf0rm@nc3!2025$Secure')
-            
-            if (userHash === validUserHash && passHash === validPassHash) {
-                // Cria sessão com expiração de 8 horas
-                const expiry = new Date()
-                expiry.setHours(expiry.getHours() + 8)
-                
-                const sessionToken = await hashString(Date.now().toString() + Math.random().toString())
-                localStorage.setItem('atlas_session', sessionToken)
-                localStorage.setItem('atlas_session_expiry', expiry.toISOString())
-                
+            if (response.success && response.access_token) {
+                // Salva o token
+                setToken(response.access_token, response.expires_in || 28800) // 8 horas default
                 setIsAuthenticated(true)
                 return true
             }
@@ -70,8 +73,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     const logout = () => {
-        localStorage.removeItem('atlas_session')
-        localStorage.removeItem('atlas_session_expiry')
+        // Chama o endpoint de logout (opcional, para logging)
+        api.post('/api/auth/logout').catch(() => {})
+        
+        // Limpa o token local
+        clearToken()
         setIsAuthenticated(false)
     }
 

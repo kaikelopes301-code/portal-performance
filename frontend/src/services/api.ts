@@ -7,6 +7,10 @@ const API_URL = import.meta.env.VITE_API_URL || (
         : 'http://localhost:8000'
 )
 
+// Chaves do localStorage para tokens
+const TOKEN_KEY = 'atlas_token'
+const TOKEN_EXPIRY_KEY = 'atlas_token_expiry'
+
 class ApiError extends Error {
     constructor(
         public status: number,
@@ -18,16 +22,49 @@ class ApiError extends Error {
     }
 }
 
+// Funções para gerenciar o token
+export function getToken(): string | null {
+    const token = localStorage.getItem(TOKEN_KEY)
+    const expiry = localStorage.getItem(TOKEN_EXPIRY_KEY)
+    
+    if (!token || !expiry) return null
+    
+    // Verifica se o token expirou
+    if (new Date(expiry) < new Date()) {
+        clearToken()
+        return null
+    }
+    
+    return token
+}
+
+export function setToken(token: string, expiresIn: number): void {
+    const expiry = new Date()
+    expiry.setSeconds(expiry.getSeconds() + expiresIn)
+    
+    localStorage.setItem(TOKEN_KEY, token)
+    localStorage.setItem(TOKEN_EXPIRY_KEY, expiry.toISOString())
+}
+
+export function clearToken(): void {
+    localStorage.removeItem(TOKEN_KEY)
+    localStorage.removeItem(TOKEN_EXPIRY_KEY)
+}
+
 async function request<T>(
     endpoint: string,
     options?: RequestInit
 ): Promise<T> {
     const url = `${API_URL}${endpoint}`
+    
+    // Obtém o token se existir
+    const token = getToken()
 
     const config: RequestInit = {
         ...options,
         headers: {
             'Content-Type': 'application/json',
+            ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
             ...options?.headers,
         },
     }
@@ -46,6 +83,12 @@ async function request<T>(
         } catch {
             errorData = null
         }
+        
+        // Se receber 401, limpa o token
+        if (response.status === 401) {
+            clearToken()
+        }
+        
         throw new ApiError(response.status, response.statusText, errorData)
     }
 

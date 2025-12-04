@@ -1,5 +1,5 @@
 // Barrel export para todos os services
-export { api, ApiError } from './api'
+export { api, ApiError, getToken, setToken, clearToken } from './api'
 export { jobService } from './jobService'
 export type { FileWithRegion, RegionsResponse } from './jobService'
 export { configService } from './configService'
