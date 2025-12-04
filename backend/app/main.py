@@ -103,6 +103,15 @@ async def lifespan(app: FastAPI):
     Gerencia o ciclo de vida da aplicação.
     Inicia e para o scheduler de tarefas agendadas.
     """
+    # Cria as tabelas do banco de dados automaticamente
+    from app.database import engine, Base
+    from app.models.job import ProcessingJob  # Importa o model para registrar na Base
+    from app.models.log import EmailLog  # Importa o model de logs
+    
+    logger.info("[Lifespan] Criando tabelas do banco de dados...")
+    Base.metadata.create_all(bind=engine)
+    logger.info("[Lifespan] Tabelas criadas/verificadas com sucesso!")
+    
     # Pula scheduler em modo de teste
     if TESTING:
         logger.info("[Lifespan] Modo de teste - scheduler desabilitado")
