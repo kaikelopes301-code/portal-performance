@@ -368,6 +368,7 @@ class Emailer:
         template = self.jenv.get_template("email_template_dark.html")
         logo_b64 = self._resolve_logo_data_uri()
         logo_cid = self.env_cfg.get("LOGO_CID", "atlas-logo").strip() or "atlas-logo"
+        logo_http_url = self.env_cfg.get("LOGO_HTTP_URL", "").strip() or None
 
         brand_vars = {
             "BODY_BG": self.env_cfg.get("BODY_BG", "#0F172A"),
@@ -516,6 +517,7 @@ class Emailer:
             copy=copy,
             logo_img_src=logo_b64,
             logo_cid=logo_cid,
+            logo_http_url=logo_http_url,
             table_columns=resolved_columns,
             table_numeric_columns=self.TABLE_NUMERIC_COLUMNS,
             table_money_columns=self.TABLE_MONEY_COLUMNS,

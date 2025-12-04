@@ -191,10 +191,10 @@ async def list_valid_regions():
     return {
         "regions": VALID_REGIONS,
         "description": {
-            "RJ": "Rio de Janeiro",
-            "SP1": "São Paulo - Região 1 (Curitiba, Goiânia, Londrina, Maringá, etc.)",
-            "SP2": "São Paulo - Região 2 (Bauru, Franca, Campo Limpo, Dom Pedro, etc.)",
-            "SP3": "São Paulo - Região 3 (BH, Uberlândia, Mooca, Cuiabá, etc.)",
-            "NNE": "Norte e Nordeste (Manaus, Belém, Bahia, Parangaba, etc.)"
+            "RJ": "RJ",
+            "SP1": "SP1 )",
+            "SP2": "SP2)",
+            "SP3": "SP3)",
+            "NNE": "NNE)"
         }
     }

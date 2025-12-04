@@ -10,11 +10,11 @@ import { useToast } from '@/components/ui/toast'
 const VALID_REGIONS = ['RJ', 'SP1', 'SP2', 'SP3', 'NNE'] as const
 
 const REGION_DESCRIPTIONS: Record<string, string> = {
-    'RJ': 'Rio de Janeiro',
-    'SP1': 'São Paulo - Região 1',
-    'SP2': 'São Paulo - Região 2', 
-    'SP3': 'São Paulo - Região 3',
-    'NNE': 'Norte e Nordeste'
+    'RJ': 'RJ',
+    'SP1': 'SP1',
+    'SP2': 'SP2', 
+    'SP3': 'SP3',
+    'NNE': 'NNE'
 }
 
 // Cores por região

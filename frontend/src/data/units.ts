@@ -17,7 +17,7 @@ export interface Region {
 export const REGIONS_DATA: Region[] = [
     {
         code: 'RJ',
-        name: 'Rio de Janeiro',
+        name: 'Regional RJ',
         units: [
             { id: 'rj-bangu', name: 'Bangu Shopping', email: 'bangu@exemplo.com', region: 'RJ' },
             { id: 'rj-carioca', name: 'Carioca Shopping', email: 'carioca@exemplo.com', region: 'RJ' },
@@ -35,7 +35,7 @@ export const REGIONS_DATA: Region[] = [
     },
     {
         code: 'SP1',
-        name: 'São Paulo - Região 1',
+        name: 'Regional SP1',
         units: [
             { id: 'sp1-londrina', name: 'Catuaí Shopping Londrina', email: 'londrina@exemplo.com', region: 'SP1' },
             { id: 'sp1-maringa', name: 'Catuaí Shopping Maringá', email: 'maringa@exemplo.com', region: 'SP1' },
@@ -50,7 +50,7 @@ export const REGIONS_DATA: Region[] = [
     },
     {
         code: 'NNE',
-        name: 'Norte e Nordeste',
+        name: 'Regional NNE',
         units: [
             { id: 'nne-amazonas', name: 'Amazonas Shopping', email: 'amazonas@exemplo.com', region: 'NNE' },
             { id: 'nne-boulevardbelem', name: 'Boulevard Belém', email: 'boulevardbelem@exemplo.com', region: 'NNE' },
@@ -67,7 +67,7 @@ export const REGIONS_DATA: Region[] = [
     },
     {
         code: 'SP2',
-        name: 'São Paulo - Região 2',
+        name: 'Regional SP2',
         units: [
             { id: 'sp2-boulevardbauru', name: 'Boulevard Bauru', email: 'boulevardbauru@exemplo.com', region: 'SP2' },
             { id: 'sp2-franca', name: 'Franca Shopping', email: 'franca@exemplo.com', region: 'SP2' },
@@ -82,7 +82,7 @@ export const REGIONS_DATA: Region[] = [
     },
     {
         code: 'SP3',
-        name: 'São Paulo - Região 3 / MG',
+        name: 'Regional SP3',
         units: [
             { id: 'sp3-boulevardbh', name: 'Boulevard BH', email: 'boulevardbh@exemplo.com', region: 'SP3' },
             { id: 'sp3-centeruberlandia', name: 'Center Shopping Uberlândia', email: 'centeruberlandia@exemplo.com', region: 'SP3' },
