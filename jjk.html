@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora profissional para estimar custos de revisão de documentos e retrabalho. Atlas Inovações.">
+    <title>Calculadora de Revisão | Atlas Inovações</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- VARIÁVEIS DE TEMA --- */
+        :root {
+            /* Cores Light (Padrão) */
+            --primary: #2F4F71;
+            --primary-dark: #1a3652;
+            --primary-light: #4a78a6;
+            --accent: #3b82f6; /* Azul mais vibrante para destaque */
+            --success: #10b981;
+            
+            --bg-base: #f0f4f8;
+            --bg-gradient: radial-gradient(circle at 50% 0%, #e0f2fe 0%, #f0f4f8 100%);
+            
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --card-border: rgba(255, 255, 255, 0.6);
+            --card-shine: rgba(255, 255, 255, 0.8);
+            
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --text-light: #ffffff;
+            
+            --input-bg: #ffffff;
+            --shadow-glow: 0 20px 50px -12px rgba(47, 79, 113, 0.25);
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            
+            --footer-bg: #0f172a;
+            --footer-text: white;
+            
+            --radius-xl: 24px;
+            --radius-md: 16px;
+        }
+
+        /* Cores Dark Mode */
+        [data-theme="dark"] {
+            --primary: #60a5fa;
+            --primary-dark: #93c5fd;
+            --primary-light: #1e293b;
+            --accent: #38bdf8;
+            
+            --bg-base: #020617;
+            --bg-gradient: radial-gradient(circle at 50% 0%, #0f172a 0%, #020617 100%);
+            
+            --card-bg: rgba(15, 23, 42, 0.6);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --card-shine: rgba(255, 255, 255, 0.05);
+            
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            
+            --input-bg: #0f172a;
+            --shadow-glow: 0 20px 50px -12px rgba(56, 189, 248, 0.15);
+            
+            --footer-bg: #020617;
+        }
+
+        /* --- RESET & BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-base);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        /* --- BACKGROUND FX (GRID & ORBS) --- */
+        .bg-wrapper {
+            position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+        }
+        
+        .bg-grid {
+            position: absolute; inset: 0;
+            background-image: linear-gradient(var(--card-border) 1px, transparent 1px),
+            linear-gradient(90deg, var(--card-border) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.15;
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+
+        .orb {
+            position: absolute; border-radius: 50%;
+            filter: blur(100px); opacity: 0.5;
+            animation: pulse-float 15s ease-in-out infinite;
+        }
+        .orb-1 { top: -10%; left: 50%; width: 600px; height: 600px; background: var(--primary); transform: translateX(-50%); opacity: 0.2; }
+        .orb-2 { top: 20%; right: -10%; width: 400px; height: 400px; background: var(--accent); opacity: 0.15; animation-delay: -5s; }
+        .orb-3 { top: 40%; left: -10%; width: 500px; height: 500px; background: var(--success); opacity: 0.1; animation-delay: -8s; }
+
+        @keyframes pulse-float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-20px, 30px) scale(1.05); }
+        }
+
+     /* --- NAVBAR --- */
+        .navbar {
+            position: fixed; top: 0; width: 100%;
+            background: rgba(255,255,255,0.01);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--card-border);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled { background: var(--card-bg); box-shadow: var(--shadow-sm); }
+        
+        .nav-content {
+            width: 100%; max-width: 1280px; margin: 0 auto;
+            display: flex; 
+            /* justify-content: space-between;  REMOVA ESTA LINHA */
+            justify-content: center; /* ADICIONE ESTA LINHA para centralizar a logo */
+            align-items: center;
+            position: relative; /* Adicione para posicionar o toggle */
+        }
+
+        .logo { height: 40px; width: auto; }
+
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 50px;
+            padding: 4px;
+            cursor: pointer;
+            display: flex; align-items: center;
+            width: 56px; height: 28px;
+            position: absolute; /* Torne absoluto */
+            right: 2rem; /* Posicione à direita */
+            transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        }
+        /* O restante do .theme-toggle e .toggle-circle continua o mesmo */
+        .toggle-circle {
+            width: 18px; height: 18px;
+            background: var(--text-main);
+            border-radius: 50%;
+            position: absolute; left: 4px;
+            transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+        [data-theme="dark"] .toggle-circle { transform: translateX(28px); background: white; }
+
+        /* --- HERO SECTION (IMERSIVA) --- */
+        .hero {
+            min-height: 100vh;
+            padding: 8rem 2rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            max-width: 1280px;
+            margin: 0 auto;
+            gap: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            display: flex; flex-direction: column; justify-content: center;
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2);
+            color: var(--accent); padding: 6px 16px; border-radius: 20px;
+            font-size: 0.85rem; font-weight: 600; margin-bottom: 1.5rem;
+            width: fit-content;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.8rem, 5vw, 4.2rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            color: var(--text-main);
+            text-wrap: balance;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+        
+        .hero-content p {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 480px;
+            line-height: 1.7;
+        }
+
+        .cta-group { display: flex; gap: 1rem; align-items: center; }
+
+        .cta-btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: var(--text-main);
+            color: var(--bg-base);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.2);
+        }
+        .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 15px 35px -5px rgba(0,0,0,0.3); }
+        
+        .cta-link {
+            color: var(--text-main); text-decoration: none; font-weight: 600;
+            padding: 1rem; transition: opacity 0.2s;
+        }
+        .cta-link:hover { opacity: 0.7; }
+
+        /* --- PREVIEW DASHBOARD (GLASSMORPHISM REFINED) --- */
+        .preview-wrapper {
+            position: relative;
+            perspective: 1500px;
+            display: flex; justify-content: center;
+        }
+
+        .preview-card {
+            width: 100%; max-width: 480px;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-top: 1px solid var(--card-shine);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-glow), inset 0 0 0 1px rgba(255,255,255,0.1);
+            transform: rotateY(-10deg) rotateX(5deg);
+            transition: transform 0.5s ease;
+            animation: floatCard 6s ease-in-out infinite;
+        }
+        
+        .preview-wrapper:hover .preview-card {
+            transform: rotateY(0deg) rotateX(0deg) scale(1.02);
+        }
+
+        @keyframes floatCard {
+            0%, 100% { transform: rotateY(-10deg) rotateX(5deg) translateY(0); }
+            50% { transform: rotateY(-8deg) rotateX(3deg) translateY(-15px); }
+        }
+
+        .preview-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 2rem; padding-bottom: 1rem;
+            border-bottom: 1px solid var(--card-border);
+        }
+        .preview-badge { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+        .window-controls { display: flex; gap: 6px; }
+        .control { width: 10px; height: 10px; border-radius: 50%; }
+
+        /* Grid layout inside the card */
+        .dashboard-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+        }
+        
+        .dash-item {
+            background: rgba(255,255,255,0.5);
+            padding: 1rem; border-radius: var(--radius-md);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        [data-theme="dark"] .dash-item { background: rgba(255,255,255,0.03); }
+
+        .dash-item.full { grid-column: span 2; background: linear-gradient(145deg, rgba(255,255,255,0.8), rgba(255,255,255,0.4)); }
+        [data-theme="dark"] .dash-item.full { background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)); }
+
+        .dash-label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; display: block; }
+        .dash-value { font-size: 1.25rem; font-weight: 700; color: var(--text-main); line-height: 1; }
+        .dash-value.big { font-size: 2.5rem; color: var(--primary); letter-spacing: -1px; }
+        
+        /* Visual Graphs */
+        .mini-graph { height: 6px; width: 100%; background: rgba(0,0,0,0.05); border-radius: 4px; margin-top: 10px; overflow: hidden; }
+        [data-theme="dark"] .mini-graph { background: rgba(255,255,255,0.1); }
+        .bar { height: 100%; border-radius: 4px; }
+        
+        .efficiency-pill {
+            grid-column: span 2;
+            margin-top: 0.5rem;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0.75rem 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            color: var(--success);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* --- FEATURES SECTION --- */
+        .features { padding: 6rem 2rem; position: relative; z-index: 1; }
+        .features-container { max-width: 1280px; margin: 0 auto; }
+        
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem; margin-top: 3rem;
+        }
+        .feature-card {
+            background: var(--input-bg); padding: 2.5rem; border-radius: var(--radius-xl);
+            border: 1px solid var(--card-border); box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-glow); border-color: var(--primary); }
+        .feature-icon {
+            font-size: 2rem; margin-bottom: 1.5rem;
+            background: var(--bg-base); width: 60px; height: 60px;
+            display: flex; align-items: center; justify-content: center; border-radius: 16px;
+        }
+
+        /* --- CALCULATOR SECTION --- */
+        .calculator-section { padding: 6rem 2rem; max-width: 1280px; margin: 0 auto; position: relative; z-index: 1; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header h2 { font-size: 2.5rem; color: var(--text-main); margin-bottom: 0.5rem; }
+
+        .calc-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2rem; align-items: start; }
+        
+        .card {
+            background: var(--input-bg); border-radius: var(--radius-xl);
+            padding: 2.5rem; box-shadow: var(--shadow-sm); border: 1px solid var(--card-border);
+        }
+
+        /* Inputs */
+        .input-group { margin-bottom: 1.5rem; }
+        .input-group label { display: block; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted); }
+        .input-wrapper {
+            display: flex; align-items: center; background: var(--bg-base);
+            border: 1px solid transparent; border-radius: 12px; padding: 4px;
+            transition: all 0.3s;
+        }
+        .input-wrapper:focus-within { border-color: var(--primary); background: var(--input-bg); box-shadow: 0 0 0 4px rgba(47, 79, 113, 0.1); }
+        
+        .step-btn {
+            width: 44px; height: 44px; border: none; background: var(--input-bg);
+            border-radius: 8px; font-size: 1.2rem; color: var(--primary); cursor: pointer;
+            transition: 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-btn:hover { background: var(--primary); color: white; }
+        
+        input[type="text"], input[type="tel"] {
+            flex: 1; border: none; background: transparent; text-align: center;
+            font-size: 1.1rem; font-weight: 600; color: var(--text-main); outline: none;
+        }
+
+        /* Summary Sticky */
+        .summary-card {
+            position: sticky; top: 100px;
+            background: var(--primary); color: white;
+            border: none; box-shadow: var(--shadow-glow);
+            overflow: hidden;
+        }
+        /* Background pattern for summary card */
+        .summary-card::before {
+            content: ''; position: absolute; inset: 0; opacity: 0.1;
+            background-image: radial-gradient(white 1px, transparent 1px); background-size: 20px 20px;
+        }
+        
+        .total-cost { position: relative; text-align: center; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 1.5rem; }
+        .total-cost span { font-size: 0.8rem; text-transform: uppercase; opacity: 0.8; letter-spacing: 1px; }
+        .total-cost strong { display: block; font-size: 3.5rem; line-height: 1.1; font-weight: 700; margin-top: 0.5rem; }
+
+        .result-row { display: flex; justify-content: space-between; padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); position: relative; }
+        .result-row:last-of-type { border: none; }
+        .result-label { font-size: 0.9rem; opacity: 0.9; }
+        .result-value { font-weight: 600; }
+
+        .actions { display: flex; gap: 1rem; margin-top: 2rem; position: relative; }
+        .btn-action {
+            flex: 1; padding: 0.8rem; border-radius: 12px; border: none;
+            cursor: pointer; font-weight: 600; transition: all 0.2s;
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+        }
+        .btn-copy { background: white; color: var(--primary); }
+        .btn-reset { background: rgba(255,255,255,0.15); color: white; backdrop-filter: blur(5px); }
+        .btn-action:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--footer-bg); color: var(--text-muted);
+            padding: 5rem 0 2rem; border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .footer-grid {
+            max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+            display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem;
+        }
+        .footer-col h4 { color: white; margin-bottom: 1.5rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a { color: inherit; text-decoration: none; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--primary); }
+        
+        .social-icons { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        .social-icon {
+            width: 40px; height: 40px; background: rgba(255,255,255,0.05);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: white; transition: all 0.3s;
+        }
+        .social-icon:hover { background: var(--primary); transform: translateY(-3px); }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero { grid-template-columns: 1fr; padding-top: 8rem; text-align: center; gap: 3rem; }
+            .hero-badge { margin: 0 auto 1.5rem; }
+            .hero-content h1 { font-size: 3rem; }
+            .hero-content p { margin: 0 auto 2rem; }
+            .cta-group { justify-content: center; }
+            .preview-card { transform: none; animation: none; margin: 0 auto; }
+            .calc-grid { grid-template-columns: 1fr; }
+            .summary-card { position: relative; top: 0; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 600px) {
+            .footer-grid { grid-template-columns: 1fr; }
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .dash-item.full { grid-column: span 1; }
+            .efficiency-pill { grid-column: span 1; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-wrapper">
+        <div class="bg-grid"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-content">
+            <img src="logo-atlas-horizontal-azul.png" alt="Atlas Inovações" class="logo" id="navLogo">
+            
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">
+                <div class="toggle-circle"></div>
+                <span style="position: absolute; right: 8px; font-size: 10px; opacity: 0.6;">🌙</span>
+                <span style="position: absolute; left: 8px; font-size: 10px; opacity: 0.6;">☀️</span>
+            </button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge"> Nova Versão 2.0</div>
+            <h1>Calcule o impacto financeiro do <span class="highlight">Retrabalho</span></h1>
+            <p>Não deixe que revisões manuais drenem seu orçamento. Use nossa calculadora inteligente para visualizar custos ocultos e o ROI da automação.</p>
+            
+            <div class="cta-group">
+                <a href="#calculator" class="cta-btn">
+                    <span>Calcular Agora</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="#features" class="cta-link">Saiba mais ↓</a>
+            </div>
+        </div>
+
+        <div class="preview-wrapper">
+            <div class="preview-card">
+                <div class="preview-header">
+                    <span class="preview-badge">Preview de Análise</span>
+                    <div class="window-controls">
+                        <div class="control" style="background:#ff5f57"></div>
+                        <div class="control" style="background:#febc2e"></div>
+                        <div class="control" style="background:#28c840"></div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="dash-item full">
+                        <span class="dash-label">Custo Mensal Estimado</span>
+                        <div class="dash-value big">R$ 12.450</div>
+                        <div class="mini-graph"><div class="bar" style="width: 65%; background: var(--primary);"></div></div>
+                    </div>
+
+                    <div class="dash-item">
+                        <span class="dash-label">Volume Total</span>
+                        <div class="dash-value">20k <span style="font-size:0.8em; font-weight:400; color:var(--text-muted)">docs</span></div>
+                        <div class="mini-graph"><div class="bar" style="width: 80%; background: var(--accent);"></div></div>
+                    </div>
+
+                    <div class="dash-item">
+                        <span class="dash-label">Horas Gastas</span>
+                        <div class="dash-value">160h</div>
+                        <div class="mini-graph"><div class="bar" style="width: 40%; background: #f59e0b;"></div></div>
+                    </div>
+
+                    <div class="efficiency-pill">
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                            <span>Potencial de Economia</span>
+                        </div>
+                        <span style="background:white; color:var(--success); padding:2px 8px; border-radius:4px; font-size:0.8em;">+40%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="features-container">
+            <div class="section-header">
+                <span style="color: var(--accent); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; font-size: 0.85rem;">Por que calcular?</span>
+                <h2>Controle total da operação</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Dados Precisos</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Elimine o "achismo". Tenha números exatos sobre o volume de documentos e o custo real.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Agilidade</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Resultados instantâneos para decisões estratégicas sobre contratações e processos.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Redução de Custos</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Identifique gargalos financeiros e otimize o budget do seu projeto rapidamente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="calculator" class="calculator-section">
+        <div class="section-header">
+            <h2>Calculadora de Custos</h2>
+            <p style="color: var(--text-muted);">Insira seus dados operacionais abaixo</p>
+        </div>
+
+        <div class="calc-grid">
+            <div class="card">
+                <h3 style="margin-bottom: 1.5rem; color: var(--text-main);">Parâmetros</h3>
+                
+                <div class="input-group">
+                    <label>Funcionários por Fornecedor</label>
+                    <div class="input-wrapper">
+                        <button class="step-btn" onclick="changeValue('funcPorFornecedor', -1)">−</button>
+                        <input type="tel" id="funcPorFornecedor" value="0" oninput="formatInt(this); calcular()">
+                        <button class="step-btn" onclick="changeValue('funcPorFornecedor', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Documentos por Funcionário (Mês)</label>
+                    <div class="input-wrapper">
+                        <button class="step-btn" onclick="changeValue('docPorFuncionario', -10)">−</button>
+                        <input type="tel" id="docPorFuncionario" value="0" oninput="formatInt(this); calcular()">
+                        <button class="step-btn" onclick="changeValue('docPorFuncionario', 10)">+</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Tempo Médio de Revisão (minutos)</label>
+                    <div class="input-wrapper">
+                        <button class="step-btn" onclick="changeValue('minPorDocumento', -1)">−</button>
+                        <input type="tel" id="minPorDocumento" value="0" oninput="formatInt(this); calcular()">
+                        <button class="step-btn" onclick="changeValue('minPorDocumento', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Custo Hora do Revisor (R$)</label>
+                    <div class="input-wrapper">
+                        <button class="step-btn" onclick="changeValue('custoHora', -5)">−</button>
+                        <input type="tel" id="custoHora" value="0" oninput="formatInt(this); calcular()">
+                        <button class="step-btn" onclick="changeValue('custoHora', 5)">+</button>
+                    </div>
+                </div>
+
+                <div class="input-group" style="margin-bottom: 0;">
+                    <label>Número de Fornecedores</label>
+                    <div class="input-wrapper">
+                        <button class="step-btn" onclick="changeValue('fornecedores', -1)">−</button>
+                        <input type="tel" id="fornecedores" value="0" oninput="formatInt(this); calcular()">
+                        <button class="step-btn" onclick="changeValue('fornecedores', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="card summary-card">
+                    <div class="total-cost">
+                        <span>Custo Total Mensal</span>
+                        <strong id="custoTotal">R$ 0,00</strong>
+                    </div>
+
+                    <div class="result-row">
+                        <span class="result-label">Documentos Totais</span>
+                        <span class="result-value" id="totalDocs">0</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Documentos Revisados</span>
+                        <span class="result-value" id="docsRevisados">0</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Horas de Retrabalho</span>
+                        <span class="result-value" id="horasRetrabalho">0,00</span>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn-action btn-reset" onclick="resetar()">
+                            Limpar
+                        </button>
+                        <button class="btn-action btn-copy" onclick="copiarResumo()">
+                            Copiar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+    /* --- FOOTER STYLES --- */
+    .site-footer {
+        background-color: #020617; /* Fundo bem escuro conforme a imagem */
+        color: #e2e8f0;
+        padding: 4rem 0 1rem;
+        font-family: 'Poppins', sans-serif;
+        border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    /* Top Section: Logo & Socials */
+    .footer-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 3rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 3rem;
+    }
+
+    .footer-logo {
+        height: 45px;
+        width: auto;
+        opacity: 0.9;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .social-btn {
+        width: 42px;
+        height: 42px;
+        background: rgba(255,255,255,0.1); /* Fundo cinza translúcido */
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .social-btn:hover {
+        background: var(--primary, #2F4F71);
+        transform: translateY(-3px);
+    }
+
+    /* Main Grid Section */
+    .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    .footer-col-header {
+        color: #64748b; /* Cor cinza/azulada para os títulos das colunas */
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+        display: block;
+    }
+
+    .footer-links-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-links-list li {
+        margin-bottom: 1rem;
+    }
+
+    .footer-link {
+        color: #f1f5f9; /* Texto quase branco */
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 400;
+        transition: color 0.2s;
+    }
+
+    .footer-link:hover {
+        color: var(--primary, #2F4F71);
+    }
+
+    /* Estilo específico para as cidades */
+    .city-title {
+        color: #3b82f6; /* Azul destaque igual da imagem */
+        font-size: 1rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .address-text {
+        color: #cbd5e1;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Bottom Bar */
+    .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 2rem;
+        font-size: 0.8rem;
+        color: #64748b;
+    }
+    
+    .ideen-logo {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: #94a3b8;
+        text-decoration: none;
+    }
+    
+    .ideen-icon {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+    }
+
+    /* Responsividade */
+    @media (max-width: 1024px) {
+        .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+    }
+    @media (max-width: 600px) {
+        .footer-top { flex-direction: column; gap: 2rem; align-items: flex-start; }
+        .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+        .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+</style>
+
+<footer class="site-footer">
+    <div class="footer-container">
+        
+        <div class="footer-top">
+            <img src="logo-atlas-branca.png" alt="Atlas Inovações" class="footer-logo">
+            
+            <div class="social-links">
+                <a href="https://www.youtube.com/@atlasinovacoes9091" target="_blank" class="social-btn" aria-label="YouTube">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+                <a href="https://www.facebook.com/atlasinovacoes/" target="_blank" class="social-btn" aria-label="Facebook">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></svg>
+                </a>
+                <a href="https://www.instagram.com/atlasinovacoes/" target="_blank" class="social-btn" aria-label="Instagram">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <a href="https://www.linkedin.com/company/atlas-inovacoes-e-tecnologia/" target="_blank" class="social-btn" aria-label="LinkedIn">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-grid">
+            <div>
+                <span class="footer-col-header">Institucional</span>
+                <ul class="footer-links-list">
+                    <li><a href="https://atlasinovacoes.com.br/a-atlas/" class="footer-link">A Atlas</a></li>
+                    <li><a href="https://atlasinovacoes.com.br/tecnologia-para-gestao-de-servicos/" class="footer-link">Tecnologia</a></li>
+                    <li><a href="https://atlasinovacoes.com.br/insights/" class="footer-link">Insights</a></li>
+                    <li><a href="https://forms.office.com/r/FP1i2thxSr" class="footer-link">Ouvidoria</a></li>
+                    <li><a href="https://atlasinovacoes.com.br/contato/" class="footer-link">Contato</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <span class="footer-col-header">Soluções</span>
+                <ul class="footer-links-list">
+                    <li><a href="https://atlasinovacoes.com.br/solucoes/afm-gestao-de-terceiros/" class="footer-link">AFM GESTÃO</a></li>
+                    <li><a href="https://atlasinovacoes.com.br/solucoes/afm-performance/" class="footer-link">AFM PERFORMANCE</a></li>
+                    <li><a href="https://atlasinovacoes.com.br/solucoes/afm-cotacao/" class="footer-link">AFM COTAÇÃO</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <span class="footer-col-header">Contatos</span>
+                <span class="city-title">Rio de Janeiro</span>
+                <div class="address-text">
+                    Rua Vitor Konder, 124<br>
+                    Barra da Tijuca – Rio de Janeiro
+                </div>
+                <div class="address-text">(21) 99166-9181</div>
+            </div>
+
+            <div>
+                <span class="footer-col-header" style="opacity: 0; pointer-events: none;">SP</span> <span class="city-title">São Paulo</span>
+                <div class="address-text">
+                    Rua Palmar 72, 3º Andar, Centro,<br>
+                    Ribeirão Pires
+                </div>
+                <div class="address-text">(21) 96504-2448</div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>Atlas Inovações - 2025 © - Todos os direitos reservados</div>
+            
+            <a href="#" class="ideen-logo" title="Desenvolvido por Ideen">
+                Desenvolvido por 
+                <strong style="color: #fff;">Ideen</strong>
+            </a>
+
+            <a href="#" style="color: inherit; text-decoration: none;">Política de privacidade</a>
+        </div>
+    </div>
+</footer>
+    <script>
+        // --- LÓGICA DA CALCULADORA ---
+        function changeValue(id, delta) {
+            const input = document.getElementById(id);
+            let val = parseInt(input.value.replace(/\D/g, '')) || 0;
+            val += delta;
+            if (val < 0) val = 0;
+            input.value = val;
+            calcular();
+        }
+
+        function formatInt(input) {
+            let val = input.value.replace(/\D/g, '');
+            input.value = val ? parseInt(val) : 0;
+        }
+
+        function calcular() {
+            const funcPorFornecedor = parseInt(document.getElementById('funcPorFornecedor').value) || 0;
+            const docPorFuncionario = parseInt(document.getElementById('docPorFuncionario').value) || 0;
+            const minPorDocumento = parseInt(document.getElementById('minPorDocumento').value) || 0;
+            const custoHora = parseInt(document.getElementById('custoHora').value) || 0;
+            const fornecedores = parseInt(document.getElementById('fornecedores').value) || 0;
+
+            // Lógica de Negócio
+            const totalFuncionarios = funcPorFornecedor * fornecedores;
+            const totalDocs = totalFuncionarios * docPorFuncionario;
+            
+            // Assumindo que 10% dos documentos são revisados (amostragem) ou retrabalho
+            // Você pode ajustar essa lógica conforme a necessidade do cliente
+            const docsRevisados = Math.round(totalDocs * 1); // Se todos passam por revisão, é * 1. Se for amostragem, * 0.10
+            
+            const minutosTotais = docsRevisados * minPorDocumento;
+            const horasRetrabalho = minutosTotais / 60;
+            const custoTotal = horasRetrabalho * custoHora;
+
+            // Atualizar UI
+            document.getElementById('totalDocs').innerText = totalDocs.toLocaleString('pt-BR');
+            document.getElementById('docsRevisados').innerText = docsRevisados.toLocaleString('pt-BR');
+            document.getElementById('horasRetrabalho').innerText = horasRetrabalho.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('custoTotal').innerText = custoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        function resetar() {
+            const inputs = ['funcPorFornecedor', 'docPorFuncionario', 'minPorDocumento', 'custoHora', 'fornecedores'];
+            inputs.forEach(id => document.getElementById(id).value = 0);
+            calcular();
+        }
+
+        function copiarResumo() {
+            const custo = document.getElementById('custoTotal').innerText;
+            const horas = document.getElementById('horasRetrabalho').innerText;
+            const texto = `Resumo da Calculadora Atlas:\nCusto Estimado: ${custo}\nHoras de Retrabalho: ${horas}`;
+            
+            navigator.clipboard.writeText(texto).then(() => {
+                alert('Resumo copiado para a área de transferência!');
+            });
+        }
+
+        // --- THEME SWITCHER ---
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const logo = document.getElementById('navLogo');
+            
+            if (currentTheme === 'light') {
+                html.setAttribute('data-theme', 'dark');
+                logo.src = "logo-atlas-branca.png"; // Assumindo que você tem a logo branca
+            } else {
+                html.setAttribute('data-theme', 'light');
+                logo.src = "logo-atlas-horizontal-azul.png";
+            }
+        }
+        
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
