@@ -17,7 +17,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
                     <div className="relative">
                         <div className="absolute inset-0 bg-blue-400/30 rounded-full blur-xl animate-pulse"></div>
                         <img 
-                            src="/logo-atlas.png" 
+                            src="/logo-atlas-branco.png" 
                             alt="Atlas Inovações" 
                             className="relative w-20 h-20 object-contain animate-pulse"
                         />

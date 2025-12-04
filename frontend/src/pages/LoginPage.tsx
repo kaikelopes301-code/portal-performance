@@ -51,7 +51,7 @@ export default function LoginPage() {
                             <div className="relative">
                                 <div className="absolute inset-0 bg-blue-400/30 rounded-full blur-xl animate-pulse"></div>
                                 <img 
-                                    src="/logo-atlas.png" 
+                                    src="/logo-atlas-branco.png" 
                                     alt="Atlas Inovações" 
                                     className="relative w-24 h-24 object-contain drop-shadow-2xl"
                                 />
