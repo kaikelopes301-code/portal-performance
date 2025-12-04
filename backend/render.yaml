@@ -2,12 +2,16 @@ services:
   - type: web
     name: portal-performance-api
     env: python
-    runtime: python-3.12.0
     region: oregon
     plan: free
-    buildCommand: cd backend && pip install --upgrade pip && pip install -r requirements.txt
+    buildCommand: |
+      export CARGO_HOME=/opt/render/project/.cargo
+      mkdir -p $CARGO_HOME/registry
+      cd backend
+      pip install --upgrade pip
+      pip install -r requirements.txt
     startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION
-        value: 3.12.0
+        value: 3.12
