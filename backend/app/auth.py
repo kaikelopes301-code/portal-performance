@@ -60,25 +60,39 @@ class UserInfo(BaseModel):
 # FUNÇÕES DE HASH E VERIFICAÇÃO
 # ============================================================================
 
+# Cache do hash da senha admin (gerado uma única vez)
+_cached_admin_hash: str | None = None
+
 def get_password_hash(password: str) -> str:
     """Gera o hash bcrypt de uma senha."""
     return pwd_context.hash(password)
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """Verifica se a senha corresponde ao hash."""
-    return pwd_context.verify(plain_password, hashed_password)
+    try:
+        return pwd_context.verify(plain_password, hashed_password)
+    except Exception as e:
+        logger.error(f"Erro ao verificar senha: {e}")
+        return False
 
 def get_admin_password_hash() -> str:
     """
     Obtém o hash da senha do admin.
     Se ADMIN_PASSWORD_HASH estiver configurado, usa ele.
-    Caso contrário, gera o hash da senha padrão.
+    Caso contrário, gera o hash da senha padrão (cacheado).
     """
-    if settings.admin_password_hash:
+    global _cached_admin_hash
+    
+    # Se há hash configurado via variável de ambiente, usa ele
+    if settings.admin_password_hash and len(settings.admin_password_hash) > 50:
         return settings.admin_password_hash
     
-    # Gera hash da senha padrão
-    return get_password_hash(DEFAULT_ADMIN_PASSWORD)
+    # Gera e cacheia o hash da senha padrão
+    if _cached_admin_hash is None:
+        _cached_admin_hash = get_password_hash(DEFAULT_ADMIN_PASSWORD)
+        logger.info(f"Hash da senha admin gerado")
+    
+    return _cached_admin_hash
 
 # ============================================================================
 # FUNÇÕES DE JWT

@@ -29,6 +29,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
+        // Limpa tokens antigos do localStorage (migração para sessionStorage)
+        localStorage.removeItem('atlas_token')
+        localStorage.removeItem('atlas_token_expiry')
+        
         // Verifica se há token válido ao carregar
         const checkAuth = async () => {
             const token = getToken()

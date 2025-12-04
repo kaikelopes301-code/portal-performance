@@ -70,7 +70,7 @@ export default function LoginPage() {
                     </div>
 
                     {/* Formulário */}
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form onSubmit={handleSubmit} className="space-y-6" autoComplete="off">
                         {/* Campo Usuário */}
                         <div className="space-y-2">
                             <label className="block text-sm font-medium text-gray-700">
@@ -89,7 +89,11 @@ export default function LoginPage() {
                                     className="w-full pl-12 pr-4 py-3.5 bg-gray-50/50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 focus:bg-white"
                                     placeholder="Digite seu usuário"
                                     required
-                                    autoComplete="username"
+                                    autoComplete="off"
+                                    autoCorrect="off"
+                                    autoCapitalize="off"
+                                    spellCheck="false"
+                                    data-form-type="other"
                                     disabled={isLoading}
                                 />
                             </div>
@@ -113,7 +117,8 @@ export default function LoginPage() {
                                     className="w-full pl-12 pr-12 py-3.5 bg-gray-50/50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 focus:bg-white"
                                     placeholder="Digite sua senha"
                                     required
-                                    autoComplete="current-password"
+                                    autoComplete="new-password"
+                                    data-form-type="other"
                                     disabled={isLoading}
                                 />
                                 <button

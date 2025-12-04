@@ -7,9 +7,12 @@ const API_URL = import.meta.env.VITE_API_URL || (
         : 'http://localhost:8000'
 )
 
-// Chaves do localStorage para tokens
+// Chaves do sessionStorage para tokens (expira ao fechar o navegador)
 const TOKEN_KEY = 'atlas_token'
 const TOKEN_EXPIRY_KEY = 'atlas_token_expiry'
+
+// Usa sessionStorage para que a sessão expire ao fechar o navegador
+const storage = sessionStorage
 
 class ApiError extends Error {
     constructor(
@@ -24,8 +27,8 @@ class ApiError extends Error {
 
 // Funções para gerenciar o token
 export function getToken(): string | null {
-    const token = localStorage.getItem(TOKEN_KEY)
-    const expiry = localStorage.getItem(TOKEN_EXPIRY_KEY)
+    const token = storage.getItem(TOKEN_KEY)
+    const expiry = storage.getItem(TOKEN_EXPIRY_KEY)
     
     if (!token || !expiry) return null
     
@@ -42,11 +45,14 @@ export function setToken(token: string, expiresIn: number): void {
     const expiry = new Date()
     expiry.setSeconds(expiry.getSeconds() + expiresIn)
     
-    localStorage.setItem(TOKEN_KEY, token)
-    localStorage.setItem(TOKEN_EXPIRY_KEY, expiry.toISOString())
+    storage.setItem(TOKEN_KEY, token)
+    storage.setItem(TOKEN_EXPIRY_KEY, expiry.toISOString())
 }
 
 export function clearToken(): void {
+    storage.removeItem(TOKEN_KEY)
+    storage.removeItem(TOKEN_EXPIRY_KEY)
+    // Também limpa do localStorage caso exista de versões anteriores
     localStorage.removeItem(TOKEN_KEY)
     localStorage.removeItem(TOKEN_EXPIRY_KEY)
 }
