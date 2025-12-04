@@ -73,7 +73,7 @@ ENVIRONMENT=production
 ### Passo 6: Testar
 
 Acesse:
-- `https://portal-performance-api.onrender.com/health` → Deve retornar `{"status": "ok"}`
+- `https://portal-performance-api.onrender.com/health` → Deve retornar `{"status": "ok", "version": "2.0.0"}`
 - `https://portal-performance-api.onrender.com/docs` → Documentação Swagger
 
 ---
