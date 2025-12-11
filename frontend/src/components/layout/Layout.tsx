@@ -49,9 +49,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <div className="w-full max-w-[1280px] flex justify-between items-center relative">
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-3 group hover:opacity-90 transition-opacity">
-                        <img 
-                            src="/logo-atlas.png" 
-                            alt="Atlas Inovações" 
+                        <img
+                            src="/logo-performance-horizontal-azul.png"
+                            alt="Atlas Inovações"
                             className="h-10 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
                         />
                     </Link>
@@ -66,8 +66,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                     to={item.href}
                                     className={cn(
                                         "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300",
-                                        isActive 
-                                            ? "bg-white dark:bg-slate-700 text-[#3b82f6] shadow-sm" 
+                                        isActive
+                                            ? "bg-white dark:bg-slate-700 text-[#3b82f6] shadow-sm"
                                             : "text-gray-600 dark:text-gray-300 hover:text-[#2F4F71] dark:hover:text-white hover:bg-white/50 dark:hover:bg-slate-700/50"
                                     )}
                                 >
@@ -89,9 +89,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                             <LogOut className="h-4 w-4" />
                             <span>Sair</span>
                         </button>
-                        
+
                         {/* Mobile Menu Button */}
-                        <button 
+                        <button
                             className="md:hidden p-2 text-gray-600"
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                         >
@@ -121,7 +121,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                 {item.name}
                             </Link>
                         ))}
-                        
+
                         {/* Logout Button - Mobile */}
                         <button
                             onClick={() => {
@@ -146,7 +146,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <footer className="relative z-10 mt-auto border-t border-white/10 bg-white/5 backdrop-blur-sm">
                 <div className="max-w-[1280px] mx-auto px-6 py-8">
                     <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                        
+
                         {/* Logo */}
                         <div className="flex items-center gap-3">
                             <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-md border border-white/20">
@@ -157,17 +157,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
                         {/* Social Links */}
                         <div className="flex items-center gap-6">
-                            <a 
-                                href="https://www.instagram.com/atlasinovacoes/" 
-                                target="_blank" 
+                            <a
+                                href="https://www.instagram.com/atlasinovacoes/"
+                                target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-white/60 hover:text-white transition-colors font-medium text-sm tracking-wider hover:scale-105 transform duration-200"
                             >
                                 INSTAGRAM
                             </a>
-                            <a 
-                                href="https://www.linkedin.com/company/atlas-inovacoes-e-tecnologia/" 
-                                target="_blank" 
+                            <a
+                                href="https://www.linkedin.com/company/atlas-inovacoes-e-tecnologia/"
+                                target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-white/60 hover:text-white transition-colors font-medium text-sm tracking-wider hover:scale-105 transform duration-200"
                             >

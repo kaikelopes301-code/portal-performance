@@ -8,7 +8,7 @@ export default function LoginPage() {
     const [error, setError] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
-    
+
     const { login } = useAuth()
     const navigate = useNavigate()
 
@@ -19,7 +19,7 @@ export default function LoginPage() {
 
         try {
             const success = await login(username, password)
-            
+
             if (success) {
                 navigate('/', { replace: true })
             } else {
@@ -33,7 +33,7 @@ export default function LoginPage() {
     }
 
     return (
-        <div 
+        <div
             className="min-h-screen flex items-center justify-center relative overflow-hidden bg-cover bg-center bg-no-repeat"
             style={{
                 // Novo background: Gráficos abstratos, sugerindo performance e dados.
@@ -54,16 +54,14 @@ export default function LoginPage() {
                         <div className="flex justify-center mb-6">
                             <div className="relative group">
                                 <div className="absolute inset-0 bg-blue-100 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                <img 
-                                    src="/logo-atlas.png" 
-                                    alt="Atlas Inovações" 
-                                    className="relative w-40 object-contain"
+                                <img
+                                    src="/logo-performance-horizontal-azul.png"
+                                    alt="Atlas Inovações"
+                                    className="relative w-52 object-contain"
                                 />
                             </div>
                         </div>
-                        <h1 className="text-3xl font-bold text-gray-900 mb-2 tracking-tight">
-                            Portal Performance
-                        </h1>
+
                         <p className="text-gray-500 text-sm font-medium">
                             Atlas Inovações
                         </p>
