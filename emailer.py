@@ -224,7 +224,7 @@ class Emailer:
         Prioriza LOGO_FILE, depois nomes comuns, depois LOGO_URL (compatibilidade).
         """
         # Lista de nomes de arquivo comuns
-        LOGO_NAMES = ["logo-atlas.png", "logo_atlas.png", "logo.png", "atlas.png", "logo.jpg", "logo.jpeg"]
+        LOGO_NAMES = ["logo-performance-horizontal-azul.png", "logo-performance-horizontal-azul.png", "logo.png", "atlas.png", "logo.jpg", "logo.jpeg"]
         
         # 1. Tentar LOGO_FILE do .env
         env_name = (self.env_cfg.get("LOGO_FILE") or "").strip()

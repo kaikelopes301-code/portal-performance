@@ -59,7 +59,7 @@ class PipelineService:
             "SENDER_NAME": os.getenv("SENDGRID_FROM_NAME", os.getenv("SENDER_NAME", "Equipe Financeira")),
             "SENDER_EMAIL": os.getenv("SENDGRID_FROM_EMAIL", os.getenv("SENDER_EMAIL", "")),
             "SLA_URL": os.getenv("SLA_URL", ""),
-            "LOGO_FILE": os.getenv("LOGO_FILE", "logo-atlas.png"),
+            "LOGO_FILE": os.getenv("LOGO_FILE", "logo-performance-horizontal-azul.png"),
             "SUBJECT_TEMPLATE": os.getenv("SUBJECT_TEMPLATE", "Medição {unidade} - {mes_ref}"),
             "USE_TEST_SUBJECT": os.getenv("USE_TEST_SUBJECT", "false"),
         }
